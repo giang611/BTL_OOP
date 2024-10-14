@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.prj.projectt.Login.RegisterController" maxWidth="400" maxHeight="350" stylesheets="@Styles.css">
+
+    <center>
+        <VBox alignment="CENTER" spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Đăng ký tài khoản" styleClass="title"/>
+
+            <TextField fx:id="usernameField" promptText="Tên đăng nhập"/>
+            <PasswordField fx:id="passwordField" promptText="Mật khẩu"/>
+            <PasswordField fx:id="confirmPasswordField" promptText="Xác nhận mật khẩu"/>
+
+            <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"/>
+
+            <Button text="Quay lại" onAction="#handleBackToLogin" styleClass="back-button"/>
+        </VBox>
+    </center>
+
+</BorderPane>
