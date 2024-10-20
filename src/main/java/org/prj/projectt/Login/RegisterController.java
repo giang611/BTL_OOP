@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.prj.projectt.Screen.ScreenController;
+import org.springframework.stereotype.Component;
 
 public class RegisterController {
 

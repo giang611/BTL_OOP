@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
+
 
 public class ScreenController {
     public static void switchScreen(Stage stage, String fxmlPath) {

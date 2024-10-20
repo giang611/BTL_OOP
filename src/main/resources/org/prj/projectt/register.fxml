@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.prj.projectt.Login.RegisterController" maxWidth="400" maxHeight="350" stylesheets="@Styles.css">
+            fx:controller="org.prj.projectt.Login.RegisterController" maxWidth="400" maxHeight="450" stylesheets="@Styles.css">
 
     <center>
         <VBox alignment="CENTER" spacing="15">
@@ -17,6 +17,8 @@
             <TextField fx:id="usernameField" promptText="Tên đăng nhập"/>
             <PasswordField fx:id="passwordField" promptText="Mật khẩu"/>
             <PasswordField fx:id="confirmPasswordField" promptText="Xác nhận mật khẩu"/>
+            <TextField fx:id="emailField" promptText="Địa chỉ email"/>
+            <TextField fx:id="phoneField" promptText="Số điện thoại"/>
 
             <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"/>
 

@@ -6,6 +6,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.prj.projectt.Screen.ScreenController;
+import org.springframework.stereotype.Component;
+
 
 public class LoginController {
 
@@ -17,13 +19,8 @@ public class LoginController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Đăng nhập");
-        alert.setHeaderText(null);
-        alert.setContentText("Xin chào, " + username + "!");
-        alert.showAndWait();
+        ScreenController.switchScreen((Stage) usernameField.getScene().getWindow(), "/org/prj/projectt/menu.fxml");
+
     }
 
     @FXML

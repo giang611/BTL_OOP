@@ -10,10 +10,17 @@
 
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+    <!-- Center the entire VBox in the AnchorPane -->
+    <VBox alignment="CENTER" spacing="30.0" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <!-- Library management label with custom styling -->
         <Label text="PHẦN MỀM QUẢN LÝ THƯ VIỆN" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
-        <HBox alignment="CENTER" spacing="20.0">
-            <Button text="Quản lý Nhân viên">
+
+        <!-- First row of buttons -->
+        <HBox alignment="CENTER" spacing="30.0">
+            <padding>
+                <Insets topRightBottomLeft="10"/>
+            </padding>
+            <Button text="Quản lý Nhân viên" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
@@ -22,7 +29,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button text="Quản lý danh mục">
+            <Button text="Quản lý danh mục" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
@@ -31,7 +38,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button text="Quản lý Mượn, Trả">
+            <Button text="Quản lý Mượn, Trả" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
@@ -41,8 +48,13 @@
                 </graphic>
             </Button>
         </HBox>
-        <HBox alignment="CENTER" spacing="20.0">
-            <Button text="Quản lý độc giả">
+
+        <!-- Second row of buttons -->
+        <HBox alignment="CENTER" spacing="30.0">
+            <padding>
+                <Insets topRightBottomLeft="10"/>
+            </padding>
+            <Button text="Quản lý độc giả" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
@@ -51,7 +63,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button text="Tìm kiếm">
+            <Button text="Tìm kiếm" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
@@ -60,7 +72,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button text="Thống kê, báo cáo">
+            <Button text="Thống kê, báo cáo" prefWidth="150" prefHeight="100">
                 <graphic>
                     <ImageView fitWidth="50" fitHeight="50">
                         <image>
