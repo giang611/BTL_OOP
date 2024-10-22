@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.thuvien.Login.RegisterController" maxWidth="400" maxHeight="450" stylesheets="@Styles.css">
+
+    <center>
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding: 20;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Đăng ký tài khoản" styleClass="title" style="-fx-font-size: 24px;"/>
+
+            <TextField fx:id="usernameField" promptText="Tên đăng nhập"
+                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+
+            <PasswordField fx:id="passwordField" promptText="Mật khẩu"
+                           style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+
+            <PasswordField fx:id="confirmPasswordField" promptText="Xác nhận mật khẩu"
+                           style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+
+            <TextField fx:id="emailField" promptText="Địa chỉ email"
+                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+
+            <TextField fx:id="phoneField" promptText="Số điện thoại"
+                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+
+            <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"
+                    style="-fx-font-size: 18px; -fx-pref-width: 150px;"/>
+
+            <Button text="Quay lại" onAction="#handleBackToLogin" styleClass="back-button"
+                    style="-fx-font-size: 18px; -fx-pref-width: 150px;"/>
+        </VBox>
+
+    </center>
+
+</BorderPane>
