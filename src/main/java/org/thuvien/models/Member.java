@@ -1,10 +1,12 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,30 +20,32 @@ public class Member {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String email;
+    private String mssv;
     @Column(nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     public Member() {}
 
-    public Member(int id, String name, String email, String phoneNumber,
-                  String password, LocalDateTime createdAt) {
-        this.id = id;
+    public Member( String name, String mssv, String phoneNumber,
+                  String password) {
         this.name = name;
-        this.email = email;
+        this.mssv = mssv;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.createdAt = createdAt;
     }
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Borrow> borrows;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings;
+    @PrePersist
+    public void handleBeforeCreate() {
+        this.createdAt = Date.from(Instant.now());
+    }
 
 }
 

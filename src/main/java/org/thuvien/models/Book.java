@@ -1,11 +1,11 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Date;
 
-import java.time.LocalDate;
 @Entity
 @Table(name="books")
 public class Book extends Document {
@@ -13,10 +13,10 @@ public class Book extends Document {
     @Column(nullable = false)
     private String publisher;
     @Column(nullable = false)
-    private LocalDate publishedDate;
+    private Date publishedDate;
 
     public Book(Builder builder) {
-        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt);
+        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt, builder.quantity);
         this.publisher = builder.publisher;
         this.publishedDate = builder.publishedDate;
     }
@@ -28,7 +28,7 @@ public class Book extends Document {
         return publisher;
     }
 
-    public LocalDate getPublishedDate() {
+    public Date getPublishedDate() {
         return publishedDate;
     }
 
@@ -49,9 +49,10 @@ public class Book extends Document {
         private String author;
         private String description;
         private String qrCode;
-        private LocalDate createdAt;
+        private Date createdAt;
         private String publisher;
-        private LocalDate publishedDate;
+        private Date publishedDate;
+        private int quantity;
 
         public Builder(int id) {
             this.id = id;
@@ -82,7 +83,7 @@ public class Book extends Document {
             return this;
         }
 
-        public Builder createdAt(LocalDate createdAt) {
+        public Builder createdAt(Date createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -92,8 +93,12 @@ public class Book extends Document {
             return this;
         }
 
-        public Builder publishedDate(LocalDate publishedDate) {
+        public Builder publishedDate(Date publishedDate) {
             this.publishedDate = publishedDate;
+            return this;
+        }
+        public Builder quantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 

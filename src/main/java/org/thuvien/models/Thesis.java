@@ -1,9 +1,11 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Table
 public class Thesis extends Document {
@@ -13,7 +15,7 @@ public class Thesis extends Document {
     private String degree;
 
     private Thesis(Builder builder) {
-        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt);
+        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt,builder.quantity);
         this.university = builder.university;
         this.degree = builder.degree;
     }
@@ -43,9 +45,10 @@ public Thesis() {}
         private String author;
         private String description;
         private String qrCode;
-        private LocalDate createdAt;
+        private Date createdAt;
         private String university;
         private String degree;
+        private int quantity;
 
         public Builder(int id) {
             this.id = id;
@@ -76,7 +79,7 @@ public Thesis() {}
             return this;
         }
 
-        public Builder createdAt(LocalDate createdAt) {
+        public Builder createdAt(Date createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -88,6 +91,10 @@ public Thesis() {}
 
         public Builder degree(String degree) {
             this.degree = degree;
+            return this;
+        }
+        public Builder quantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 

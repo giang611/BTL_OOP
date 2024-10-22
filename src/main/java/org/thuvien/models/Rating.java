@@ -1,10 +1,12 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Table
 @Getter
@@ -20,14 +22,14 @@ public class Rating {
     @Column(nullable = false)
     private String review;
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
     @ManyToOne
     @JoinColumn(name = "member", nullable = false)
     private Member member;
     public Rating() {}
 
     public Rating(int id, int documentId,
-                  int rating, String review, LocalDateTime createdAt) {
+                  int rating, String review, Date createdAt) {
         this.id = id;
         this.documentId = documentId;
         this.rating = rating;

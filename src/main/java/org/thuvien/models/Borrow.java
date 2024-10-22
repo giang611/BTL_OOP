@@ -1,10 +1,12 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Table
 @Getter
@@ -20,20 +22,23 @@ public class Borrow {
     @JoinColumn(name = "document_id", nullable = false)
     private Document document;
     @Column(nullable = false)
-    private LocalDate borrowDate;
+    private Date borrowDate;
     @Column(nullable = false)
-    private LocalDate returnDate;
+    private Date returnDate;
     @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
+    private int quantity;
 
     public Borrow() {}
 
-    public Borrow(int id,LocalDate borrowDate, LocalDate returnDate,
-                  String status) {
+    public Borrow(int id,Date borrowDate, Date returnDate,
+                  String status,int quantity) {
         this.id = id;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
         this.status = status;
+        this.quantity = quantity;
     }
 }
 

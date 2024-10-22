@@ -13,7 +13,7 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
             <Label text="Đăng nhập" styleClass="title"/>
-            <TextField fx:id="usernameField" promptText="Tên đăng nhập"
+            <TextField fx:id="phoneField" promptText="Số điện thoại"
                        style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
             <PasswordField fx:id="passwordField" promptText="Mật khẩu"
                            style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>

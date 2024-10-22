@@ -1,10 +1,11 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,9 +27,12 @@ public abstract class Document {
     private String description;
     @Column(name = "qr_code")
     private String qrCode;
+
+    @Column(name="quantity")
+    private int quantity;
     @Column(name = "created_at")
-    private LocalDate createdAt;
-    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Date createdAt;
+    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Borrow> borrows;
     @ManyToMany
     @JoinTable(
@@ -41,7 +45,7 @@ public abstract class Document {
     public Document() {}
 
     public Document(int id, String isbn,String title, String author,
-                    String description, String qrCode, LocalDate createdAt) {
+                    String description, String qrCode, Date createdAt,int quantity) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -49,6 +53,7 @@ public abstract class Document {
         this.description = description;
         this.qrCode = qrCode;
         this.createdAt = createdAt;
+        this.quantity = quantity;
     }
     public abstract void printInfo();
 }

@@ -6,28 +6,41 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thuvien.Screen.ScreenController;
+import org.thuvien.Service.MemberService;
+import org.thuvien.models.Member;
+
+import java.util.Optional;
 
 @Component
 public class RegisterController {
-
+@Autowired
+private MemberService memberService;
     @FXML
-    private TextField usernameField;
+    private TextField phoneField;
 
     @FXML
     private PasswordField passwordField;
 
     @FXML
     private PasswordField confirmPasswordField;
+    @FXML
+    private TextField  name;
+    @FXML
+    private TextField  mssvField;
 
     @FXML
     private void handleRegister(ActionEvent event) {
-        String username = usernameField.getText();
+        String phone = phoneField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        String name = this.name.getText();
+        String mssv = this.mssvField.getText();
+        Optional<Member> existingMember = memberService.getMemberByPhone(phone);
+         Optional<Member> existingMember2 = memberService.getMemberByMssv(mssv);
+        if (phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()||name.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Lỗi", "Vui lòng điền đầy đủ thông tin.");
             return;
         }
@@ -36,13 +49,26 @@ public class RegisterController {
             showAlert(Alert.AlertType.ERROR, "Lỗi", "Mật khẩu không khớp.");
             return;
         }
+        if(existingMember.isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Số điện thoại đã được đăng ký.");
+            return;
+        }
+        if(existingMember2.isPresent()) {
+            showAlert(Alert.AlertType.ERROR, "Lỗi", "Mã số sinh viên đã tồn tại");
+            return;
+        }
+        Member newMember = new Member(name, mssv,phone, password);
+        memberService.createMember(newMember);
 
         showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
+        ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/login.fxml");
     }
 
     @FXML
     private void handleBackToLogin(ActionEvent event) {
-        ScreenController.switchScreen((Stage) usernameField.getScene().getWindow(), "/login.fxml");
+        phoneField.clear();
+        passwordField.clear();
+        ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/login.fxml");
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

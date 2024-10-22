@@ -11,33 +11,53 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thuvien.Application;
-import org.thuvien.Entity.Book;
-import org.thuvien.JPA;
+import org.thuvien.models.Member;
 import org.thuvien.Screen.ScreenController;
+import org.thuvien.Service.MemberService;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 @Component
 public class LoginController {
-    @Autowired
-    private JPA a;
+   @Autowired
+   private MemberService memberService;
     @FXML
-    private TextField usernameField;
+    private TextField phoneField;
 
     @FXML
     private PasswordField passwordField;
 
     @FXML
-    private void handleLogin(ActionEvent event) {
-        ScreenController.switchScreen((Stage) usernameField.getScene().getWindow(), "/menu.fxml");
+    private void handleLogin() {
+        String phone = phoneField.getText();
+        String password = passwordField.getText();
+        Optional<Member> optionalMember =memberService.getMemberByPhone(phone);
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            if (member.getPassword().equals(password)) {
+                ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/menu.fxml");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Lỗi Đăng Nhập", "Tên đăng nhập hoặc mật khẩu không đúng.");
+            }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Lỗi Đăng Nhập", "Tên đăng nhập hoặc mật khẩu không đúng.");
+        }
 
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
     private void handleRegister(ActionEvent event) {
-        ScreenController.switchScreen((Stage) usernameField.getScene().getWindow(), "/register.fxml");
-List<Book> tmp=a.findAll();
+
+        ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/register.fxml");
     }
     public static void loadView(Stage stage) {
 

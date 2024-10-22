@@ -1,4 +1,4 @@
-package org.thuvien.Entity;
+package org.thuvien.models;
 
 import lombok.Getter;
 import lombok.Setter;

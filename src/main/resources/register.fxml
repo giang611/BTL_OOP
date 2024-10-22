@@ -14,8 +14,9 @@
             </padding>
 
             <Label text="Đăng ký tài khoản" styleClass="title" style="-fx-font-size: 24px;"/>
-
-            <TextField fx:id="usernameField" promptText="Tên đăng nhập"
+            <TextField fx:id="name" promptText="Họ và tên"
+                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+            <TextField fx:id="phoneField" promptText="Số điện thoại"
                        style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
 
             <PasswordField fx:id="passwordField" promptText="Mật khẩu"
@@ -24,10 +25,7 @@
             <PasswordField fx:id="confirmPasswordField" promptText="Xác nhận mật khẩu"
                            style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
 
-            <TextField fx:id="emailField" promptText="Địa chỉ email"
-                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
-
-            <TextField fx:id="phoneField" promptText="Số điện thoại"
+            <TextField fx:id="mssvField" promptText="Mã số sinh viên"
                        style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
 
             <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"
