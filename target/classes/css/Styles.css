@@ -1,0 +1,85 @@
+.sidebar {
+    background-color: #008080;
+    padding: 20;
+}
+
+.sidebar-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #008080;
+}
+
+.login-button {
+    -fx-background-color: #008080;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+}
+
+
+.register-button:hover {
+    background-color: #45a049;
+}
+.register-button {
+    -fx-background-color: #008080;
+    -fx-text-fill: white;
+    -fx-padding: 5 12 ;
+    -fx-font-size: 12px;
+    -fx-pref-width: 100;
+}
+
+.back-button {
+    -fx-background-color: #008080;
+    -fx-text-fill: white;
+    -fx-padding: 5 12;
+    -fx-font-size: 12px;
+    -fx-pref-width: 100;
+}
+.anchor-pane {
+    -fx-background-color: #f0f0f0;
+}
+
+.label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-text-fill: #333;
+}
+
+.image-view {
+    -fx-fit-width: 20;
+    -fx-fit-height: 20;
+}
+
+#btnManageStaff:disabled {
+    -fx-background-color: #d1c4e9;
+}
+
+#btnManageCategories {
+    -fx-background-color: #03dac6;
+}
+
+#btnManageBorrowReturn {
+    -fx-background-color: #ff0266;
+}
+
+#btnManageReaders {
+    -fx-background-color: #018786;
+}
+
+#btnSearch {
+    -fx-background-color: #03a9f4;
+}
+
+#btnReports {
+    -fx-background-color: #ffeb3b;
+}
+
+#btnPower {
+    -fx-background-color: #b00020;
+}
+
+

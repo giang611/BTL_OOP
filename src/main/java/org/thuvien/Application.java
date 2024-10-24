@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.thuvien.Login.LoginController;
+import org.thuvien.controller.LoginController;
 
 @Configuration
 @SpringBootApplication
@@ -30,6 +30,7 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.centerOnScreen();
         LoginController.loadView(stage);
     }
 

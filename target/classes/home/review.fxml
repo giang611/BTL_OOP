@@ -1,0 +1,39 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.ReviewController">
+    <!-- Title -->
+    <Label text="Đánh giá và Nhận xét" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <!-- Rating Section -->
+    <HBox spacing="5">
+        <Label text="Đánh giá:" />
+        <ComboBox fx:id="ratingComboBox" promptText="Chọn điểm">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1"/>
+                    <String fx:value="2"/>
+                    <String fx:value="3"/>
+                    <String fx:value="4"/>
+                    <String fx:value="5"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </HBox>
+
+    <!-- Review Text -->
+    <Label text="Viết nhận xét:" />
+    <TextArea fx:id="reviewTextArea" promptText="Nhập nhận xét của bạn..." wrapText="true" prefRowCount="5" />
+
+    <!-- Submit Button -->
+    <Button text="Gửi" onAction="#submitReview" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+
+    <!-- Display Reviews Section -->
+    <Label text="Nhận xét của người dùng:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+    <VBox fx:id="reviewsVBox" spacing="10" />
+</VBox>

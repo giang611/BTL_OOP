@@ -18,9 +18,9 @@ public abstract class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
-    private String isbn;
+    private String name;
     @Column(nullable = false)
-    private String title;
+    private String isbn;
     @Column(nullable = false)
     private String author;
     @Lob
@@ -44,11 +44,11 @@ public abstract class Document {
 
     public Document() {}
 
-    public Document(int id, String isbn,String title, String author,
+    public Document(int id,String name, String isbn, String author,
                     String description, String qrCode, Date createdAt,int quantity) {
         this.id = id;
         this.isbn = isbn;
-        this.title = title;
+        this.name=name;
         this.author = author;
         this.description = description;
         this.qrCode = qrCode;

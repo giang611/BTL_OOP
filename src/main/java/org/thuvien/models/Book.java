@@ -16,7 +16,7 @@ public class Book extends Document {
     private Date publishedDate;
 
     public Book(Builder builder) {
-        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt, builder.quantity);
+        super(builder.id,builder.name,builder.isbn, builder.author, builder.description, builder.qrCode, builder.createdAt, builder.quantity);
         this.publisher = builder.publisher;
         this.publishedDate = builder.publishedDate;
     }
@@ -34,7 +34,6 @@ public class Book extends Document {
 
     @Override
     public void printInfo() {
-        System.out.println("Book Title: " + getTitle());
         System.out.println("Author: " + getAuthor());
         System.out.println("Publisher: " + publisher);
         System.out.println("Published Date: " + publishedDate);
@@ -44,8 +43,8 @@ public class Book extends Document {
 
     public static class Builder {
         private int id;
+        private String name;
         private String isbn;
-        private String title;
         private String author;
         private String description;
         private String qrCode;
@@ -63,10 +62,6 @@ public class Book extends Document {
             return this;
         }
 
-        public Builder title(String title) {
-            this.title = title;
-            return this;
-        }
 
         public Builder author(String author) {
             this.author = author;

@@ -15,7 +15,7 @@ public class Thesis extends Document {
     private String degree;
 
     private Thesis(Builder builder) {
-        super(builder.id,builder.isbn, builder.title, builder.author, builder.description, builder.qrCode, builder.createdAt,builder.quantity);
+        super(builder.id,builder.name,builder.isbn, builder.author, builder.description, builder.qrCode, builder.createdAt,builder.quantity);
         this.university = builder.university;
         this.degree = builder.degree;
     }
@@ -30,7 +30,6 @@ public Thesis() {}
 
     @Override
     public void printInfo() {
-        System.out.println("Thesis Title: " + getTitle());
         System.out.println("Author: " + getAuthor());
         System.out.println("University: " + university);
         System.out.println("Degree: " + degree);
@@ -40,6 +39,7 @@ public Thesis() {}
 
     public static class Builder {
         private int id;
+        private String name;
         private String isbn;
         private String title;
         private String author;
@@ -59,10 +59,6 @@ public Thesis() {}
             return this;
         }
 
-        public Builder title(String title) {
-            this.title = title;
-            return this;
-        }
 
         public Builder author(String author) {
             this.author = author;
