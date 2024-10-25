@@ -14,7 +14,7 @@
         <Button text="Quản lý kho sách" fx:id="btManageBooks" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleManageBooks" />
         <Button text="Quản lý mượn trả" fx:id="btBorrowBooks" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleBorrowBooks" />
         <Button text="Quản lý người đọc" fx:id="btManageMember" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleManageMembers" />
-        <Button text="Đánh giá và nhận xét" fx:id="btReview" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleReview" />
+        <Button text="Đánh giá" fx:id="btReview" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleReview" />
 
         <Region style="-fx-pref-height: 1.0;" />
     </children>

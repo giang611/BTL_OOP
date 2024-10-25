@@ -19,6 +19,7 @@ public class Book extends Document {
         super(builder.id,builder.name,builder.isbn, builder.author, builder.description, builder.qrCode, builder.createdAt, builder.quantity);
         this.publisher = builder.publisher;
         this.publishedDate = builder.publishedDate;
+        Throwable a;
     }
 
     public Book() {

@@ -23,7 +23,7 @@ public abstract class Document {
     private String isbn;
     @Column(nullable = false)
     private String author;
-    @Lob
+    @Column(nullable = false)
     private String description;
     @Column(name = "qr_code")
     private String qrCode;

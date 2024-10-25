@@ -5,36 +5,36 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.thuvien.controller.RegisterController" prefWidth="600" prefHeight="525" stylesheets="@../css/Styles.css">
+            fx:controller="org.thuvien.controller.RegisterController"
+            prefWidth="700" prefHeight="550"
+            stylesheets="@../css/Styles.css">
 
     <center>
-        <VBox alignment="CENTER" spacing="15" style="-fx-padding: 20;">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;">
+            <Label text="Đăng ký tài khoản" styleClass="title"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
 
-            <Label text="Đăng ký tài khoản" styleClass="title" style="-fx-font-size: 24px;"/>
             <TextField fx:id="name" promptText="Họ và tên"
-                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+                       style="-fx-font-size: 20px; -fx-pref-width: 350px; -fx-pref-height: 40px;"/>
             <TextField fx:id="phoneField" promptText="Số điện thoại"
-                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+                       style="-fx-font-size: 20px; -fx-pref-width: 350px; -fx-pref-height: 40px;"/>
 
             <PasswordField fx:id="passwordField" promptText="Mật khẩu"
-                           style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+                           style="-fx-font-size: 20px; -fx-pref-width: 350px; -fx-pref-height: 40px;"/>
 
             <PasswordField fx:id="confirmPasswordField" promptText="Xác nhận mật khẩu"
-                           style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+                           style="-fx-font-size: 20px; -fx-pref-width: 350px; -fx-pref-height: 40px;"/>
 
             <TextField fx:id="mssvField" promptText="Mã số sinh viên"
-                       style="-fx-font-size: 16px; -fx-pref-width: 300px;"/>
+                       style="-fx-font-size: 20px; -fx-pref-width: 350px; -fx-pref-height: 40px;"/>
 
-            <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"
-                    style="-fx-font-size: 18px; -fx-pref-width: 150px;"/>
-
-            <Button text="Quay lại" onAction="#handleBackToLogin" styleClass="back-button"
-                    style="-fx-font-size: 18px; -fx-pref-width: 150px;"/>
+            <HBox alignment="CENTER" spacing="15" style="-fx-padding: 20 0 0 0;">
+                <Button text="Đăng ký" onAction="#handleRegister" styleClass="register-button"
+                        style="-fx-font-size: 20px; -fx-pref-width: 150px; -fx-pref-height: 50px;"/>
+                <Button text="Quay lại" onAction="#handleBackToLogin" styleClass="back-button"
+                        style="-fx-font-size: 20px; -fx-pref-width: 150px; -fx-pref-height: 50px;"/>
+            </HBox>
         </VBox>
-
     </center>
 
 </BorderPane>

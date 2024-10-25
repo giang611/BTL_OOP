@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="mainLayout" xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.LibraryController">
+    <children>
+        <fx:include source="library.fxml" />
+
+        <fx:include source="review.fxml" />
+    </children>
+</HBox>

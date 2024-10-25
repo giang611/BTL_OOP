@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.BookManagerController" prefWidth="950.0" prefHeight="800.0" style="-fx-background-color: #E0F2F1;">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.BookManagerController" prefWidth="1150.0" prefHeight="800.0" style="-fx-background-color: #E0F2F1;">
     <children>
         <Label layoutX="20.0" layoutY="20.0" text="Quản lý kho sách" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
 
@@ -23,11 +23,10 @@
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
 
-                <TableColumn fx:id="titleColumn" text="Tên sách" prefWidth="250.0" />
+                <TableColumn fx:id="nameColumn" text="Tên sách" prefWidth="250.0" />
 
                 <TableColumn fx:id="authorColumn" text="Tên tác giả" prefWidth="200.0" />
 
-                <TableColumn fx:id="yearColumn" text="Năm xuất bản" prefWidth="150.0" />
 
                 <TableColumn fx:id="descriptionColumn" text="Mô tả" prefWidth="250.0" />
                 <TableColumn fx:id="quantity" text="Số lượng" prefWidth="100.0" />

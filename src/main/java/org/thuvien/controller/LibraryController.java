@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
+import org.thuvien.Application;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,53 +45,72 @@ public class LibraryController {
         buttons.add(btManageMember);
         buttons.add(btReview);
 
-        // Khởi tạo trạng thái ban đầu cho các nút (chưa được chọn)
         resetButtonStyles();
     }
 
-    // Đặt lại style cho tất cả các nút về trạng thái chưa chọn
     private void resetButtonStyles() {
         for (Button button : buttons) {
             button.getStyleClass().remove("button-selected");
-            button.getStyleClass().add("button");  // Gán lại lớp CSS ban đầu
+            button.getStyleClass().add("button");
         }
     }
 
-
+    public AnchorPane loadFXML(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        loader.setControllerFactory(Application.getApplicationContext()::getBean);
+        return loader.load();
+    }
     public void loadContent(String fxmlFile) {
         try {
-            AnchorPane newContent = FXMLLoader.load(getClass().getResource("/" + fxmlFile));
+            AnchorPane newContent = loadFXML(fxmlFile);
             if (mainLayout.getChildren().size() > 1) {
                 mainLayout.getChildren().remove(1);
             }
             mainLayout.getChildren().add(newContent);
         } catch (IOException e) {
+            System.err.println("Lỗi khi tải FXML: " + fxmlFile);
             e.printStackTrace();
         }
     }
-    public void loadContent1(String fxmlFile) {
+    @FXML
+    private void handleManageBooks(ActionEvent event) {
+        loadContent("/home/bookManagement.fxml");
+        resetButtonStyles();
+        btManageBooks.getStyleClass().add("button-selected");
+    }
+
+    public VBox loadFXMLVbox(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource( fxmlFile));
+        loader.setControllerFactory(Application.getApplicationContext()::getBean);
+        return loader.load();
+    }
+
+    public void loadContentVbox(String fxmlFile) {
         try {
-            VBox newContent = FXMLLoader.load(getClass().getResource("/" + fxmlFile));
+            VBox newContent = loadFXMLVbox(fxmlFile);
             if (mainLayout.getChildren().size() > 1) {
                 mainLayout.getChildren().remove(1);
             }
             mainLayout.getChildren().add(newContent);
         } catch (IOException e) {
+            System.err.println("Lỗi khi tải FXML: " + fxmlFile);
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleReview(ActionEvent event) {
+        resetButtonStyles();
+        btReview.getStyleClass().add("button-selected");
+        loadContentVbox("/home/review.fxml");
+    }
+
 
     @FXML
     private void handleHome(ActionEvent event) {
         ScreenController.switchScreen((Stage) mainLayout.getScene().getWindow(), "/home/menu.fxml");
     }
 
-    @FXML
-    private void handleManageBooks(ActionEvent event) {
-        loadContent("home/bookManagement.fxml");
-        resetButtonStyles();
-        btManageBooks.getStyleClass().add("button-selected");
-    }
 
     @FXML
     private void handleBorrowBooks(ActionEvent event) {
@@ -102,12 +122,7 @@ public class LibraryController {
         resetButtonStyles();
         btManageMember.getStyleClass().add("button-selected");
     }
-    @FXML
-    private void handleReview(ActionEvent event) {
-        resetButtonStyles();
-        btReview.getStyleClass().add("button-selected");
-        loadContent1("home/review.fxml");
-    }
+
 
 
 

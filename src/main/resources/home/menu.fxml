@@ -23,7 +23,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="btnManageCategories" text="Quản lý sách" styleClass="button-custom" onMouseClicked="#handleBook">
+            <Button fx:id="btnManageBook" text="Quản lý sách" styleClass="button-custom" onMouseClicked="#handleBook">
                 <graphic>
                     <ImageView fx:id="imgBook" fitWidth="90" fitHeight="90">
                         <image>
@@ -44,7 +44,7 @@
         </HBox>
 
         <HBox alignment="CENTER" styleClass="hbox-padding">
-            <Button fx:id="btnManageReaders" text="Quản lý Độc giả" styleClass="button-custom" onMouseClicked="#handleManageReaders">
+            <Button fx:id="BtnManageMembers" text="Quản lý Độc giả" styleClass="button-custom" onMouseClicked="#handleManageReaders">
                 <graphic>
                     <ImageView fx:id="imgReaders" fitWidth="90" fitHeight="90">
                         <image>
@@ -53,7 +53,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="btnSearch" text="Tìm kiếm" styleClass="button-custom" onMouseClicked="#handleSearch">
+            <Button fx:id="btnReview" text="Đánh giá" styleClass="button-custom" onMouseClicked="#handleReview">
                 <graphic>
                     <ImageView fx:id="imgSearch" fitWidth="90" fitHeight="90">
                         <image>
@@ -62,7 +62,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="btnReports" text="Đăng xuất" styleClass="button-custom" onMouseClicked="#handleLogout">
+            <Button fx:id="btnLogout" text="Đăng xuất" styleClass="button-custom" onMouseClicked="#handleLogout">
                 <graphic>
                     <ImageView fx:id="imgLogout" fitWidth="90" fitHeight="90">
                         <image>
