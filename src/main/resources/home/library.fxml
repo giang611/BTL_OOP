@@ -15,7 +15,7 @@
         <Button text="Quản lý mượn trả" fx:id="btBorrowBooks" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleBorrowBooks" />
         <Button text="Quản lý người đọc" fx:id="btManageMember" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleManageMembers" />
         <Button text="Đánh giá" fx:id="btReview" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleReview" />
-
+        <Button text="Tra cứu sách" fx:id="btSearchBook" styleClass="sidebar-button" style="-fx-font-size: 18px; -fx-padding: 15px; -fx-min-width: 200px;" onAction="#handleSearch" />
         <Region style="-fx-pref-height: 1.0;" />
     </children>
 </VBox>

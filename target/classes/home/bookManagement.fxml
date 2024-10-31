@@ -22,15 +22,10 @@
         <TableView fx:id="bookTable" layoutX="20.0" layoutY="130.0" prefWidth="1000.0" prefHeight="550.0" style="-fx-background-color: white; -fx-border-color: #004D40;">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
-
                 <TableColumn fx:id="nameColumn" text="Tên sách" prefWidth="250.0" />
-
                 <TableColumn fx:id="authorColumn" text="Tên tác giả" prefWidth="200.0" />
-
-
                 <TableColumn fx:id="descriptionColumn" text="Mô tả" prefWidth="250.0" />
                 <TableColumn fx:id="quantity" text="Số lượng" prefWidth="100.0" />
-
                 <TableColumn fx:id="actionColumn" text="Hành động" prefWidth="150.0" />
             </columns>
         </TableView>

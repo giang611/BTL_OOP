@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" spacing="10" style="-fx-background-color: #f0f0f0;" prefHeight="800.0" prefWidth="1200.0">
+    <fx:include source="library.fxml" />
+
+    <fx:include source="bookSearch.fxml" />
+</HBox>

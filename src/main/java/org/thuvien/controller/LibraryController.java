@@ -30,20 +30,21 @@ public class LibraryController {
     private Button btManageMember;
     @FXML
     private Button btReview;
+    @FXML
+    private Button btSearchBook;
 
 
-    // Danh sách các nút điều hướng
     private List<Button> buttons;
 
     @FXML
     private void initialize() {
-        // Thêm các nút vào danh sách để dễ quản lý
         buttons = new ArrayList<>();
         buttons.add(btHome);
         buttons.add(btManageBooks);
         buttons.add(btBorrowBooks);
         buttons.add(btManageMember);
         buttons.add(btReview);
+        buttons.add(btSearchBook);
 
         resetButtonStyles();
     }
@@ -108,6 +109,7 @@ public class LibraryController {
 
     @FXML
     private void handleHome(ActionEvent event) {
+        resetButtonStyles();
         ScreenController.switchScreen((Stage) mainLayout.getScene().getWindow(), "/home/menu.fxml");
     }
 
@@ -121,6 +123,13 @@ public class LibraryController {
     private void handleManageMembers(ActionEvent event) {
         resetButtonStyles();
         btManageMember.getStyleClass().add("button-selected");
+    }
+    @FXML
+    private void handleSearch(ActionEvent event) {
+        resetButtonStyles();
+        btSearchBook.getStyleClass().add("button-selected");
+        loadContentVbox("/home/bookSearch.fxml");
+
     }
 
 

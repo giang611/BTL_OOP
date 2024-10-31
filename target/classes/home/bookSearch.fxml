@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.thuvien.controller.BookSearchController"
+      spacing="15" alignment="CENTER"
+      style="-fx-padding: 20; -fx-background-color: #e0f7fa;">
+
+    <Label text="Quản lý kho sách"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" />
+
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 0 0 10 0;">
+        <Label text="Tìm kiếm:" style="-fx-font-size: 16px;" />
+        <TextField fx:id="txtSearchQuery"
+                   promptText="Nhập tên sách..." HBox.hgrow="ALWAYS" />
+        <Button text="Tìm" fx:id="btnSearch" onAction="#handleSearchBooks"
+                style="-fx-background-color: #009688; -fx-text-fill: white;
+                       -fx-font-size: 16px; -fx-padding: 8 20;
+                       -fx-background-radius: 5;" />
+    </HBox>
+
+    <TableView fx:id="tableBooks" VBox.vgrow="ALWAYS"
+               prefWidth="1250" prefHeight="550">
+        <columns>
+            <TableColumn fx:id="colIsbn" text="ISBN" prefWidth="150" />
+            <TableColumn fx:id="colTitle" text="Tên sách" prefWidth="400" />
+            <TableColumn fx:id="colAuthor" text="Tên tác giả" prefWidth="200" />
+            <TableColumn fx:id="colDescription" text="Mô tả" prefWidth="600" />
+        </columns>
+    </TableView>
+
+    <Button text="Thêm sách mới"
+            style="-fx-background-color: #ff5722; -fx-text-fill: white;
+                   -fx-font-size: 16px; -fx-padding: 10 20;
+                   -fx-background-radius: 5;" />
+</VBox>
