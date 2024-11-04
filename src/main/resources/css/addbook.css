@@ -1,0 +1,63 @@
+.root {
+    -fx-background-color: #009688;
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+.label-title {
+    -fx-font-size: 32px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.3), 4, 0, 0, 2);
+}
+
+.label {
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-background-radius: 8;
+    -fx-padding: 12;
+    -fx-font-size: 16px;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #333333;
+    -fx-border-color: #B2DFDB;
+    -fx-border-radius: 8;
+}
+
+.combo-box {
+    -fx-background-radius: 8;
+    -fx-font-size: 16px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #B2DFDB;
+    -fx-border-radius: 8;
+}
+
+.text-area {
+    -fx-background-radius: 8;
+    -fx-padding: 12;
+    -fx-font-size: 16px;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #333333;
+    -fx-border-color: #B2DFDB;
+    -fx-border-radius: 8;
+    -fx-pref-height: 400px;
+}
+
+.button-add {
+    -fx-background-color: #00796B;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 12 24;
+}
+
+.button-cancel {
+    -fx-background-color: #B71C1C;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 12 24;
+}

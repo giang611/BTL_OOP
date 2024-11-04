@@ -6,7 +6,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Button?>
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.ReviewController" prefWidth="950.0" prefHeight="800.0">
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.ReviewController" prefWidth="1150.0" prefHeight="800.0">
     <!-- Title -->
     <Label text="Đánh giá và Nhận xét" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 

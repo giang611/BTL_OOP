@@ -81,5 +81,20 @@
 #btnPower {
     -fx-background-color: #b00020;
 }
+.alert-success {
+    -fx-background-color: #d4edda;
+    -fx-text-fill: #155724;
+}
+
+.alert-success .header {
+    -fx-background-color: #c3e6cb;
+    -fx-text-fill: #155724;
+}
+
+.alert-success .content {
+    -fx-background-color: #d4edda;
+    -fx-text-fill: #155724;
+}
+
 
 
