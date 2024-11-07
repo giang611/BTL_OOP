@@ -10,6 +10,7 @@ import org.thuvien.repository.BookRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,7 @@ public class BookService {
             bookDTO.setName(book.getName());
             bookDTO.setDescription(book.getDescription());
             bookDTO.setQuantity(book.getQuantity());
-
+            bookDTO.setCategories(book.getCategories());
             bookDTOs.add(bookDTO);
         }
 
@@ -49,10 +50,29 @@ public class BookService {
                 .description(bookDTO.getDescription())
                 .quantity(bookDTO.getQuantity())
                 .categories(bookDTO.getCategory())
+                .image(bookDTO.getImage())
                 .build();
 
         bookRepository.save(book);
     }
+    public List<BookDTO> searchBooks(String name, String author, String genre) {
+        List<Book> books = bookRepository.searchBooks(name, author, genre);
+        return books.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Phương thức chuyển đổi từ Book sang BookDTO
+    private BookDTO convertToDTO(Book book) {
+        BookDTO dto = new BookDTO();
+        dto.setId(book.getId());
+        dto.setName(book.getName());
+        dto.setAuthor(book.getAuthor());
+        dto.setCategories(book.getCategories()); // Giả định Book có trường categories
+        dto.setDescription(book.getDescription());
+        return dto;
+    }
+
 
 }
 

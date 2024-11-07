@@ -24,35 +24,35 @@ public abstract class Document {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "qr_code")
-    private String qrCode;
+    @Lob
+    @Column(name = "image", columnDefinition = "BLOB")
+    private byte[] image;
 
     @Column(name = "quantity")
     private int quantity;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    protected Date createdAt;
 
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Borrow> borrows;
 
    private String author;
 
-    // Lưu trữ thể loại dưới dạng chuỗi, phân tách bằng dấu phẩy
     @Column(name = "categories")
     private String categories;
 
     public Document() {}
 
-    public Document(int id, String name,String author, String description, String qrCode, Date createdAt, int quantity, String categories) {
+    public Document(int id, String name, String author, String description, Date createdAt, int quantity, String categories, byte[] image) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.qrCode = qrCode;
         this.createdAt = createdAt;
         this.quantity = quantity;
         this.categories = categories;
-        this.author=author;
+        this.author = author;
+        this.image = image;
     }
 
     public abstract void printInfo();

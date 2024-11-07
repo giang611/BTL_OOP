@@ -24,13 +24,13 @@
     -fx-border-color: #B2DFDB;
     -fx-border-radius: 8;
 }
-
-.combo-box {
-    -fx-background-radius: 8;
-    -fx-font-size: 16px;
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #B2DFDB;
-    -fx-border-radius: 8;
+.label-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, #FF7043, #D32F2F);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 4, 0, 0, 2);
+    -fx-padding: 10px;
+    -fx-alignment: center;
 }
 
 .text-area {

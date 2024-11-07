@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.thuvien.Application;
+import org.thuvien.dto.BookDTO;
 
 @Controller
 public class ScreenController {
@@ -15,6 +16,24 @@ public class ScreenController {
             FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
             loader.setControllerFactory(Application.getApplicationContext()::getBean);
             Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void switchScreenBook(Stage stage, String fxmlPath, BookDTO book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            ViewBookController controller = loader.getController();
+            if (controller != null) {
+                controller.setBook(book);
+            }
+
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
             stage.show();

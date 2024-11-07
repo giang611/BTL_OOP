@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.thuvien.dto.BookAddDTO;
 import org.thuvien.service.BookService;
 
+import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -31,7 +35,7 @@ public class AddBookController {
     private TextField authorField;
 
     @FXML
-    private ComboBox<String> categoryComboBox;
+    private TextField categoryField;
 
     @FXML
     private TextField publisherField;
@@ -50,20 +54,55 @@ public class AddBookController {
 
     @FXML
     private Button cancelButton;
+    @FXML
+    private Button uploadButton;
+
+    @FXML
+    private ImageView imageView;
+
+    private byte[] imageBytes;
 
     @FXML
     public void initialize() {
-        ObservableList<String> categories = FXCollections.observableArrayList("Sách giáo khoa", "Sách trinh thám", "Sách khoa học viễn tưởng", "Sách tâm lý học");
-        categoryComboBox.setItems(categories);
 
         addButton.setOnAction(event -> addBook());
         cancelButton.setOnAction(event -> closeWindow());
+        uploadButton.setOnAction(event -> chooseImage());
+    }
+
+    private void chooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chọn ảnh");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        File file = fileChooser.showOpenDialog(uploadButton.getScene().getWindow());
+        if (file != null) {
+            try (InputStream fileInputStream = new FileInputStream(file);
+                 ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+                int nRead;
+                byte[] data = new byte[1024];
+                while ((nRead = fileInputStream.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                buffer.flush();
+                imageBytes = buffer.toByteArray();
+
+                Image image = new Image(file.toURI().toString());
+                imageView.setImage(image);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void addBook() {
         String title = titleField.getText();
         String authors = authorField.getText();
-        String category = categoryComboBox.getValue();
+        String category = categoryField.getText();
         String publisher = publisherField.getText();
         LocalDate publishedDate = publishedDatePicker.getValue();
         String description = descriptionArea.getText();
@@ -98,6 +137,7 @@ public class AddBookController {
         bookDTO.setDescription(description);
         bookDTO.setQuantity(quantity);
         bookDTO.setCategory(category);
+        bookDTO.setImage(imageBytes);
 
         bookService.addBook(bookDTO);
 

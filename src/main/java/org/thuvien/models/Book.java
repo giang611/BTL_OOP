@@ -1,13 +1,19 @@
 package org.thuvien.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name="books")
+@Getter
+@Setter
 public class Book extends Document {
 
     @Column(nullable = false)
@@ -16,7 +22,7 @@ public class Book extends Document {
     private Date publishedDate;
 
     public Book(Builder builder) {
-        super(builder.id,builder.name,builder.author, builder.description, builder.qrCode, builder.createdAt, builder.quantity,builder.categories);
+        super(builder.id,builder.name,builder.author, builder.description, builder.createdAt, builder.quantity,builder.categories,builder.image);
         this.publisher = builder.publisher;
         this.publishedDate = builder.publishedDate;
     }
@@ -37,7 +43,6 @@ public class Book extends Document {
         System.out.println("Publisher: " + publisher);
         System.out.println("Published Date: " + publishedDate);
         System.out.println("Description: " + getDescription());
-        System.out.println("QR Code: " + getQrCode());
     }
 
     public static class Builder {
@@ -52,6 +57,7 @@ public class Book extends Document {
         private Date publishedDate;
         private int quantity;
         private String categories;
+        private byte[] image;
 
         public Builder name(String name) {
        this.name = name;
@@ -102,8 +108,19 @@ public class Book extends Document {
             return this;
         }
 
+        public Builder image(byte[] image) {
+            this.image = image;
+            return this;
+        }
+
         public Book build() {
             return new Book(this);
+        }
+    }
+    @PrePersist
+    public void setCreatedAt() {
+        if (this.createdAt == null) {
+            this.createdAt = new Date();
         }
     }
 }

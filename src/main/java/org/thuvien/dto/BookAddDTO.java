@@ -18,6 +18,7 @@ public class BookAddDTO {
     private String description;
     private int quantity;
     private String category;
+    private byte[] image;
 
 
 }

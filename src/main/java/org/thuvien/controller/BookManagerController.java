@@ -3,36 +3,29 @@ package org.thuvien.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.thuvien.Application;
 import org.thuvien.dto.BookDTO;
+import org.thuvien.repository.BookRepository;
 import org.thuvien.service.BookService;
 import org.thuvien.service.GoogleBooksService;
-
-import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class BookManagerController {
-@FXML
-private HBox mainLayout;
     @FXML
     private TableView<BookDTO> bookTable;
     @FXML
     private TableColumn<BookDTO, String> idColumn;
+    @FXML
+    private TableColumn<BookDTO, String> genreColumn;
     @FXML
     private TableColumn<BookDTO, String> nameColumn;
     @FXML
@@ -43,12 +36,19 @@ private HBox mainLayout;
     private TableColumn<BookDTO, Void> actionColumn;
     @FXML
     private Button addButton;
-
+    @FXML
+    private TextField titleSearchField;
+    @FXML
+    private TextField authorSearchField;
+    @FXML
+    private TextField genreSearchField;
     @Autowired
     private BookService bookService;
 
     @Autowired
     private GoogleBooksService googleBooksService;
+    @Autowired
+    private BookRepository bookRepository;
 
     @FXML
     public void initialize() {
@@ -56,10 +56,12 @@ private HBox mainLayout;
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
+
 
         loadBooks();
 
-        // Thiết lập cellFactory cho cột hành động
+
         actionColumn.setCellFactory(new Callback<TableColumn<BookDTO, Void>, TableCell<BookDTO, Void>>() {
             @Override
             public TableCell<BookDTO, Void> call(final TableColumn<BookDTO, Void> param) {
@@ -69,34 +71,29 @@ private HBox mainLayout;
                     private final Button deleteButton = new Button();
 
                     {
-                        // Đặt hình ảnh cho các nút
                         ImageView viewIcon = new ImageView(new Image(getClass().getResourceAsStream("/icons/view.png")));
-                        viewIcon.setFitWidth(24);   // Đặt chiều rộng icon
-                        viewIcon.setFitHeight(24);  // Đặt chiều cao icon
+                        viewIcon.setFitWidth(24);
+                        viewIcon.setFitHeight(24);
                         viewButton.setGraphic(viewIcon);
 
                         ImageView editIcon = new ImageView(new Image(getClass().getResourceAsStream("/icons/edit.png")));
-                        editIcon.setFitWidth(24);   // Đặt chiều rộng icon
-                        editIcon.setFitHeight(24);  // Đặt chiều cao icon
+                        editIcon.setFitWidth(24);
+                        editIcon.setFitHeight(24);
                         editButton.setGraphic(editIcon);
 
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/icons/delete.png")));
-                        deleteIcon.setFitWidth(24);   // Đặt chiều rộng icon
-                        deleteIcon.setFitHeight(24);  // Đặt chiều cao icon
+                        deleteIcon.setFitWidth(24);
+                        deleteIcon.setFitHeight(24);
                         deleteButton.setGraphic(deleteIcon);
 
-                        // Áp dụng kiểu dáng cho các nút
                         String buttonStyle = "-fx-background-color: transparent; -fx-padding: 5px; -fx-border-width: 0; -fx-cursor: hand;";
                         viewButton.setStyle(buttonStyle);
                         editButton.setStyle(buttonStyle);
                         deleteButton.setStyle(buttonStyle);
 
-                        // Thiết lập hiệu ứng sáng cho nút khi nhấn
                         setButtonEffect(viewButton);
                         setButtonEffect(editButton);
                         setButtonEffect(deleteButton);
-
-                        // Đặt sự kiện cho các nút
                         viewButton.setOnAction(event -> handleViewBook(getTableView().getItems().get(getIndex())));
                         editButton.setOnAction(event -> handleEditBook(getTableView().getItems().get(getIndex())));
                         deleteButton.setOnAction(event -> handleDeleteBook(getTableView().getItems().get(getIndex())));
@@ -123,51 +120,45 @@ private HBox mainLayout;
     }
 
     private void loadBooks() {
-        if (bookService != null) {
             List<BookDTO> books = bookService.ListbookDTO();
             ObservableList<BookDTO> bookList = FXCollections.observableArrayList(books);
             bookTable.setItems(bookList);
-        } else {
-            System.err.println("BookService chưa được khởi tạo.");
-        }
+
     }
 
     @FXML
     private void handleSearch() {
-        // Logic tìm kiếm sách
+        String name = titleSearchField.getText().trim();
+        String author = authorSearchField.getText().trim();
+        String genre = genreSearchField.getText().trim();
+
+        List<BookDTO> filteredBooks = bookService.searchBooks(
+                name.isEmpty() ? null : name,
+                author.isEmpty() ? null : author,
+                genre.isEmpty() ? null : genre
+        );
+
+
+        ObservableList<BookDTO> searchResults = FXCollections.observableArrayList(filteredBooks);
+        bookTable.setItems(searchResults);
     }
 
-    // Xử lý logic cho nút xem
+
+
     private void handleViewBook(BookDTO book) {
-        // Logic xem thông tin sách
+        ScreenController.switchScreenBook((Stage) addButton.getScene().getWindow(), "/home/viewbook.fxml",book);
     }
 
-    // Xử lý logic cho nút sửa
+
     private void handleEditBook(BookDTO book) {
-        // Logic sửa sách
+
     }
 
-    // Xử lý logic cho nút xóa
+
     private void handleDeleteBook(BookDTO book) {
-        // Logic xóa sách
+
     }
-    public VBox loadFXMLVbox(String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource( fxmlFile));
-        loader.setControllerFactory(Application.getApplicationContext()::getBean);
-        return loader.load();
-    }
-    public void loadContentVbox(String fxmlFile) {
-        try {
-            VBox newContent = loadFXMLVbox(fxmlFile);
-            if (mainLayout.getChildren().size() > 1) {
-                mainLayout.getChildren().remove(1);
-            }
-            mainLayout.getChildren().add(newContent);
-        } catch (IOException e) {
-            System.err.println("Lỗi khi tải FXML: " + fxmlFile);
-            e.printStackTrace();
-        }
-    }
+
     @FXML
     private void handleAddBook() {
         ScreenController.switchScreen((Stage) addButton.getScene().getWindow(), "/dialog/add_book.fxml");

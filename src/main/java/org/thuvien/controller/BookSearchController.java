@@ -43,7 +43,6 @@ public class BookSearchController {
 
     @FXML
     private void initialize() {
-        // Gán giá trị cho các cột
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));

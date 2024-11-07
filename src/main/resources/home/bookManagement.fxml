@@ -13,8 +13,16 @@
 
         <HBox layoutX="20.0" layoutY="70.0" spacing="15.0">
             <children>
-                <Label text="Tìm kiếm:" style="-fx-font-size: 16px;" />
-                <TextField fx:id="searchField" promptText="Nhập tên sách..." style="-fx-font-size: 14px; -fx-padding: 10px;" onKeyReleased="#handleSearch" />
+                <Label text="Tìm kiếm tên sách:" style="-fx-font-size: 16px;" />
+                <TextField fx:id="titleSearchField" promptText="Nhập tên sách..." style="-fx-font-size: 14px; -fx-padding: 10px;" />
+
+                <Label text="Tìm kiếm tác giả:" style="-fx-font-size: 16px;" />
+                <TextField fx:id="authorSearchField" promptText="Nhập tên tác giả..." style="-fx-font-size: 14px; -fx-padding: 10px;" />
+
+                <Label text="Tìm kiếm thể loại:" style="-fx-font-size: 16px;" />
+                <TextField fx:id="genreSearchField" promptText="Nhập thể loại..." style="-fx-font-size: 14px; -fx-padding: 10px;" />
+
+                <Button text="Tìm kiếm" style="-fx-background-color: #009688; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 5px 10px;" onAction="#handleSearch"/>
             </children>
         </HBox>
 
@@ -23,6 +31,7 @@
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
                 <TableColumn fx:id="nameColumn" text="Tên sách" prefWidth="250.0" />
                 <TableColumn fx:id="authorColumn" text="Tên tác giả" prefWidth="250.0" />
+                <TableColumn fx:id="genreColumn" text="Thể loại" prefWidth="150.0" />
                 <TableColumn fx:id="descriptionColumn" text="Mô tả" prefWidth="300.0" />
 
                 <!-- Cột hành động để chứa các nút Sửa và Xóa -->
