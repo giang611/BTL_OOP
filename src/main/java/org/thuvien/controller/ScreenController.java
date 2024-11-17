@@ -41,5 +41,23 @@ public class ScreenController {
             e.printStackTrace();
         }
     }
+    public static void switchScreenBookEdit(Stage stage, String fxmlPath, BookDTO book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            EditBookController controller = loader.getController();
+            if (controller != null) {
+                controller.setBook(book);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     }
 

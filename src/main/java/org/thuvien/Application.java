@@ -36,6 +36,8 @@ public class Application extends javafx.application.Application {
 
     public static ConfigurableApplicationContext getApplicationContext() {
         return applicationContext;
+
+
     }
 }
 

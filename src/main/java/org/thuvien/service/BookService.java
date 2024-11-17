@@ -62,15 +62,18 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    // Phương thức chuyển đổi từ Book sang BookDTO
     private BookDTO convertToDTO(Book book) {
         BookDTO dto = new BookDTO();
         dto.setId(book.getId());
         dto.setName(book.getName());
         dto.setAuthor(book.getAuthor());
-        dto.setCategories(book.getCategories()); // Giả định Book có trường categories
+        dto.setCategories(book.getCategories());
         dto.setDescription(book.getDescription());
         return dto;
+    }
+
+    public void deleteBook(BookDTO bookDTO) {
+        bookRepository.deleteById(bookDTO.getId());
     }
 
 

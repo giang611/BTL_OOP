@@ -30,7 +30,7 @@ public class MenuController {
 
     @FXML
     private void handleManageStaff(MouseEvent event) {
-        System.out.println("Chức năng Quản lý Nhân viên đã được chọn.");
+        ScreenController.switchScreen((Stage) btnReview.getScene().getWindow(), "/dialog/BorrowRecord.fxml");
     }
 
     @FXML
@@ -40,7 +40,7 @@ public class MenuController {
 
     @FXML
     private void handleManageLoans(MouseEvent event) {
-        System.out.println("Chức năng Quản lý Mượn Trả đã được chọn.");
+        ScreenController.switchScreen((Stage) btnReview.getScene().getWindow(), "/home/mixBookLoan.fxml");
     }
 
     @FXML

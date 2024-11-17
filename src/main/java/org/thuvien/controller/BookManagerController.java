@@ -31,7 +31,7 @@ public class BookManagerController {
     @FXML
     private TableColumn<BookDTO, String> authorColumn;
     @FXML
-    private TableColumn<BookDTO, String> descriptionColumn;
+    private TableColumn<BookDTO, String> quantity;
     @FXML
     private TableColumn<BookDTO, Void> actionColumn;
     @FXML
@@ -55,7 +55,7 @@ public class BookManagerController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         genreColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
 
 
@@ -146,21 +146,39 @@ public class BookManagerController {
 
 
     private void handleViewBook(BookDTO book) {
-        ScreenController.switchScreenBook((Stage) addButton.getScene().getWindow(), "/home/viewbook.fxml",book);
+        ScreenController.switchScreenBook((Stage) addButton.getScene().getWindow(), "/dialog/viewbook.fxml",book);
     }
 
 
     private void handleEditBook(BookDTO book) {
-
+        ScreenController.switchScreenBookEdit((Stage) addButton.getScene().getWindow(), "/dialog/edit_book.fxml",book);
     }
 
 
     private void handleDeleteBook(BookDTO book) {
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDeleteAlert.setTitle("Xóa sách");
+        confirmDeleteAlert.setHeaderText("Bạn chắc chắn muốn xóa?");
+        confirmDeleteAlert.setContentText("Tên sách: " + book.getName());
 
+        confirmDeleteAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                bookService.deleteBook(book);
+
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Xóa thành công");
+                successAlert.setHeaderText(null);
+                successAlert.setContentText("Sách đã được xóa thành công.");
+                successAlert.show();
+
+                loadBooks();
+            }
+        });
     }
 
     @FXML
     private void handleAddBook() {
         ScreenController.switchScreen((Stage) addButton.getScene().getWindow(), "/dialog/add_book.fxml");
     }
+
 }

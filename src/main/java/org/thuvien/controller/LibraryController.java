@@ -116,6 +116,7 @@ public class LibraryController {
 
     @FXML
     private void handleBorrowBooks(ActionEvent event) {
+        loadContent("/home/BookLoanManagement.fxml");
         resetButtonStyles();
         btBorrowBooks.getStyleClass().add("button-selected");
     }

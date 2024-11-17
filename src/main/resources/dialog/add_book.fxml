@@ -38,8 +38,8 @@
         <Label text="Mô tả:" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="label-form" />
         <TextArea fx:id="descriptionArea" promptText="Nhập mô tả chi tiết về sách" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="text-area" prefWidth="400.0" prefHeight="200.0" wrapText="true" />
 
-        <Label text="Chọn ảnh:" GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="label-form" />
-        <Button text="Chọn ảnh" fx:id="uploadButton" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="button-upload" />
+        <Label text="Ảnh bìa:" GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="label-form" />
+        <Button text="Thêm ảnh" fx:id="uploadButton" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="button-upload" />
         <ImageView fx:id="imageView" GridPane.rowIndex="8" GridPane.columnIndex="1" fitWidth="200.0" fitHeight="200.0" preserveRatio="true" />
 
     </GridPane>

@@ -23,7 +23,7 @@ public class Member {
     private String mssv;
     @Column(nullable = false)
     private String phoneNumber;
-    @Column(nullable = false)
+    @Column()
     private String password;
     @Column(nullable = false)
     private Date createdAt;
