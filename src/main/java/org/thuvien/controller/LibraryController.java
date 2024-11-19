@@ -124,6 +124,8 @@ public class LibraryController {
     private void handleManageMembers(ActionEvent event) {
         resetButtonStyles();
         btManageMember.getStyleClass().add("button-selected");
+        loadContent("/home/MemberManagement.fxml");
+
     }
     @FXML
     private void handleSearch(ActionEvent event) {

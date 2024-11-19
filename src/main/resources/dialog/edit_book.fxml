@@ -29,6 +29,9 @@
             <VBox alignment="CENTER" spacing="15" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="8">
                 <ImageView fx:id="bookImageView" fitHeight="250" fitWidth="200" style="-fx-background-color: #E0E0E0; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 2;" />
                 <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #009688;" text="Bìa sách" />
+
+                <!-- Nút để chọn ảnh -->
+                <Button onAction="#handleImageSelect" style="-fx-font-size: 16; -fx-background-color: #0096; -fx-text-fill: white; -fx-padding: 10 20; -fx-border-radius: 5; -fx-cursor: hand;" text="Chọn ảnh" />
             </VBox>
 
             <VBox alignment="TOP_LEFT" spacing="20" GridPane.columnIndex="1">
@@ -58,7 +61,7 @@
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="12">
-                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #009688;" text="Số lượng trong kho:" />
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #009688;" text="Số lượng:" />
                     <TextField fx:id="quantityField" prefHeight="47.0" prefWidth="333.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #B0BEC5; -fx-border-width: 1; -fx-font-size: 16; -fx-padding: 10;" />
                 </HBox>
 
@@ -67,16 +70,17 @@
                     <TextArea fx:id="descriptionField" maxHeight="150" prefHeight="103.0" prefRowCount="3" prefWidth="361.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #B0BEC5; -fx-border-width: 1; -fx-font-size: 16; -fx-padding: 10;" wrapText="true" />
                 </HBox>
             </VBox>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
         </GridPane>
 
         <HBox alignment="CENTER_RIGHT" layoutX="600.0" layoutY="800.0" spacing="20" style="-fx-padding: 20 30 20 0;">
@@ -85,3 +89,4 @@
         </HBox>
     </children>
 </AnchorPane>
+

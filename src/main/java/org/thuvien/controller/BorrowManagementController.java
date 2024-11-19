@@ -43,6 +43,8 @@ public class BorrowManagementController {
 
     @FXML
     private TableColumn<Borrow, String> librarianColumn;
+    @FXML
+    private TableColumn<Borrow, String> quantityColumn;
 
     @FXML
     private TableColumn<Borrow, LocalDate> borrowDateColumn;
@@ -62,13 +64,14 @@ public class BorrowManagementController {
     public void initialize() {
         serialColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMember().getName()));
-        librarianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
+        librarianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLibrarian()));
         borrowDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
         returnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         borrowDateColumn.setCellFactory(createDateCellFactory(formatter));
         returnDateColumn.setCellFactory(createDateCellFactory(formatter));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         loadBorrowData();
 
@@ -98,14 +101,12 @@ public class BorrowManagementController {
                         deleteButton.setGraphic(deleteIcon);
 
                         String buttonStyle = "-fx-background-color: transparent; -fx-padding: 5px; -fx-border-width: 0; -fx-cursor: hand;";
-                        viewButton.setStyle(buttonStyle);
                         editButton.setStyle(buttonStyle);
                         deleteButton.setStyle(buttonStyle);
 
-                        setButtonEffect(viewButton);
+
                         setButtonEffect(editButton);
                         setButtonEffect(deleteButton);
-                        viewButton.setOnAction(event -> handleViewBorrow(getTableView().getItems().get(getIndex())));
                         editButton.setOnAction(event -> handleEditBorrow(getTableView().getItems().get(getIndex())));
                         deleteButton.setOnAction(event -> handleDeleteBorrow(getTableView().getItems().get(getIndex())));
                     }
@@ -121,7 +122,7 @@ public class BorrowManagementController {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            HBox actionButtons = new HBox(10, viewButton, editButton, deleteButton);
+                            HBox actionButtons = new HBox(10, editButton, deleteButton);
                             setGraphic(actionButtons);
                         }
                     }
@@ -144,16 +145,41 @@ public class BorrowManagementController {
             }
         };
     }
-    private void handleViewBorrow(Borrow book) {
+    private void handleEditBorrow(Borrow borrow) {
+        ScreenController.switchScreenEditBorrow((Stage) borrowButton.getScene().getWindow(), "/dialog/edit_borrow.fxml",borrow);
     }
 
 
-    private void handleEditBorrow(Borrow book) {
+    private void handleDeleteBorrow(Borrow borrow) {
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Xác nhận xóa");
+        confirmationDialog.setHeaderText("Bạn có chắc chắn muốn xóa bản ghi mượn này?");
+        confirmationDialog.setContentText("Hành động này không thể hoàn tác!");
+
+        confirmationDialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    borrowService.deleteBorrow(borrow.getId());
+
+                    borrowList.remove(borrow);
+                    bookTable.refresh();
+
+                    showAlert(Alert.AlertType.INFORMATION, "Xóa thành công", "Bản ghi đã được xóa.");
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Lỗi", "Không thể xóa bản ghi!");
+                }
+            }
+        });
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
-
-    private void handleDeleteBorrow(Borrow book) {
-    }
 
     private void loadBorrowData() {
         List<Borrow> borrows = borrowService.findAllBorrows();

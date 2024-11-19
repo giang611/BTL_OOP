@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.thuvien.models.Member;
 import org.thuvien.repository.MemberRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,5 +22,15 @@ public class MemberService {
     public Optional<Member> getMemberByMssv(String mssv) {
         Optional<Member> member = memberRepository.findByMssv(mssv);
         return member;
+    }
+    public List<Member> findAllMembers()
+    {
+        return memberRepository.findAll();
+    }
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
+    public void deleteMember(Member member) {
+        memberRepository.delete(member);
     }
 }

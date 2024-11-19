@@ -45,7 +45,7 @@ public class MenuController {
 
     @FXML
     private void handleManageReaders(MouseEvent event) {
-        System.out.println("Chức năng Quản lý Độc giả đã được chọn.");
+        ScreenController.switchScreen((Stage) btnReview.getScene().getWindow(), "/home/mixMemberManagement.fxml");
     }
 
     @FXML

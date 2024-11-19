@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.thuvien.Application;
 import org.thuvien.dto.BookDTO;
+import org.thuvien.models.Borrow;
+import org.thuvien.models.Member;
 
 @Controller
 public class ScreenController {
@@ -59,5 +61,43 @@ public class ScreenController {
             e.printStackTrace();
         }
     }
+    public static void switchScreenEditBorrow(Stage stage, String fxmlPath, Borrow borrowRecord) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            EditBorrowController controller = loader.getController();
+            if (controller != null) {
+                controller.setBorrowRecord(borrowRecord);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    public static void switchScreenEditMember(Stage stage, String fxmlPath, Member member) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            EditMemberController controller = loader.getController();
+            if (controller != null) {
+                controller.setMember(member);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}
 

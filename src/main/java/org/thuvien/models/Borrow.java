@@ -1,6 +1,8 @@
 package org.thuvien.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 @Table(name = "borrow")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Borrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +38,6 @@ public class Borrow {
 
     @Column(nullable = false)
     private int quantity;
-
-    public Borrow() {}
-
-    public Borrow(Member member, Document document, LocalDate borrowDate, LocalDate returnDate,
-                  String status, int quantity) {
-        this.member = member;
-        this.document = document;
-        this.borrowDate = borrowDate;
-        this.returnDate = returnDate;
-        this.status = status;
-        this.quantity = quantity;
-    }
+    @Column(name = "librarian", nullable = false, length = 255)
+    private String librarian;
 }

@@ -24,12 +24,13 @@
         <TableView fx:id="bookTable" layoutX="20.0" layoutY="130.0" prefHeight="550.0" prefWidth="1050.0" style="-fx-background-color: white; -fx-border-color: #004D40;">
             <columns>
                 <TableColumn fx:id="serialColumn" prefWidth="100.0" text="Số Seri" />
-                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Tên người mượn" />
-                <TableColumn fx:id="librarianColumn" prefWidth="200.0" text="Người ghi nhận" />
+                <TableColumn fx:id="nameColumn" prefWidth="175.0" text="Tên người mượn" />
+                <TableColumn fx:id="librarianColumn" prefWidth="175.0" text="Người ghi nhận" />
                 <TableColumn fx:id="borrowDateColumn" prefWidth="150.0" text="Ngày mượn" />
                 <TableColumn fx:id="returnDateColumn" prefWidth="150.0" text="Hạn trả" />
+                <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Số lượng" />
                 <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Trạng thái" />
-                <TableColumn fx:id="actionColumn" text="Hành động" prefWidth="150.0" />
+                <TableColumn fx:id="actionColumn" text="Hành động" prefWidth="100.0" />
             </columns>
         </TableView>
     </children>
