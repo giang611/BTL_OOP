@@ -14,6 +14,7 @@ import org.thuvien.Application;
 import org.thuvien.models.Member;
 import org.thuvien.service.MemberService;
 import javafx.scene.control.Alert;
+import org.thuvien.utils.SessionManager;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -36,7 +37,13 @@ public class LoginController {
         if (optionalMember.isPresent()) {
             Member member = optionalMember.get();
             if (member.getPassword().equals(password)) {
-                ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/home/menu.fxml");
+                if(member.getRole().equals("admin")) {
+                    ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/home/menu_admin.fxml");
+                }
+                else{
+                    ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/home/menu_user.fxml");
+                }
+                SessionManager.setCurrentUser(member);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Lỗi Đăng Nhập", "Tên đăng nhập hoặc mật khẩu không đúng.");
             }

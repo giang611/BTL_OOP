@@ -2,14 +2,15 @@ package org.thuvien.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.thuvien.dto.BookDTO;
 import org.thuvien.models.Book;
 import org.thuvien.models.Borrow;
 import org.thuvien.models.Member;
@@ -19,13 +20,10 @@ import org.thuvien.repository.MemberRepository;
 import org.thuvien.utils.SessionManager;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Controller
-public class BookBorrowController {
+public class BookBorrowUserController {
 
-    @FXML
-    private TextField serialTextField;
     @FXML
     private Label bookNameLabel;
     @FXML
@@ -39,8 +37,6 @@ public class BookBorrowController {
     private TextField borrowerNameTextField;
     @FXML
     private TextField borrowerPhoneTextField;
-    @FXML
-    private DatePicker borrowDatePicker;
     @FXML
     private DatePicker returnDatePicker;
     @FXML
@@ -57,41 +53,40 @@ public class BookBorrowController {
     @Autowired
     private MemberRepository memberRepository;
 
+    private BookDTO selectedBook;
+
     @FXML
-    private void loadBookInfo() {
-        String serial = serialTextField.getText();
+    private void initialize() {
+        Member member = SessionManager.getCurrentUser();
+        borrowerMssvTextField.setText(member.getMssv());
+        borrowerNameTextField.setText(member.getName());
+        borrowerPhoneTextField.setText(member.getPhoneNumber());
 
-        try {
-            Optional<Book> book = bookRepository.findById(Integer.parseInt(serial));
+    }
 
-            if (book.isPresent()) {
-                Book foundBook = book.get();
-                bookNameLabel.setText(foundBook.getName());
-                authorLabel.setText(foundBook.getAuthor());
-                statusLabel.setText(foundBook.getQuantity() > 0 ? "Còn" : "Hết");
-                quantityLabel.setText(String.valueOf(foundBook.getQuantity()));
-            } else {
-                showAlert("Không tìm thấy sách", "Mã serial không tồn tại.");
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Lỗi định dạng", "Mã serial phải là số nguyên.");
+    public void setBorrowRecord(BookDTO book) {
+        this.selectedBook = book;
+
+        if (selectedBook != null) {
+            bookNameLabel.setText(selectedBook.getName());
+            authorLabel.setText(selectedBook.getAuthor());
+            statusLabel.setText(selectedBook.getQuantity() > 0 ? "Còn" : "Hết");
+            quantityLabel.setText(String.valueOf(selectedBook.getQuantity()));
         }
     }
 
     @FXML
     public void saveBorrowRecord(ActionEvent event) {
-        String serial = serialTextField.getText();
         String borrowerName = borrowerNameTextField.getText();
         String borrowerPhone = borrowerPhoneTextField.getText();
         String borrowerMssv = borrowerMssvTextField.getText();
-        LocalDate borrowDate = borrowDatePicker.getValue();
+        LocalDate borrowDate = LocalDate.now();
         LocalDate returnDate = returnDatePicker.getValue();
         Member currentUser = SessionManager.getCurrentUser();
 
-
         int borrowQuantity;
 
-        if (serial.isEmpty() || borrowerName.isEmpty() || borrowerPhone.isEmpty() || borrowDate == null || returnDate == null||borrowerMssv.isEmpty()) {
+        if (borrowerName.isEmpty() || borrowerPhone.isEmpty() || borrowDate == null || returnDate == null || borrowerMssv.isEmpty()) {
             showAlert("Thiếu thông tin", "Vui lòng nhập đầy đủ thông tin.");
             return;
         }
@@ -103,28 +98,20 @@ public class BookBorrowController {
             return;
         }
 
-        Optional<Book> bookOpt = bookRepository.findById(Integer.parseInt(serial));
-        if (!bookOpt.isPresent()) {
-            showAlert("Không tìm thấy sách", "Mã serial không tồn tại.");
+        if (selectedBook == null) {
+            showAlert("Chưa chọn sách", "Vui lòng chọn sách trước khi mượn.");
             return;
         }
 
-        Book book = bookOpt.get();
-
-        if (borrowQuantity > book.getQuantity()) {
+        if (borrowQuantity > selectedBook.getQuantity()) {
             showAlert("Số lượng không đủ", "Không đủ số lượng sách để mượn.");
             return;
         }
-
-        book.setQuantity(book.getQuantity() - borrowQuantity);
+Book book=bookRepository.findById(selectedBook.getId()).get();
+        book.setQuantity(selectedBook.getQuantity() - borrowQuantity);
         bookRepository.save(book);
 
-        Member member = new Member();
-        member.setName(borrowerName);
-        member.setPhoneNumber(borrowerPhone);
-        member.setMssv(borrowerMssv);
-        member.setRole("user");
-        memberRepository.save(member);
+        Member member = SessionManager.getCurrentUser();
 
         Borrow borrowRecord = new Borrow();
         borrowRecord.setDocument(book);
@@ -147,9 +134,10 @@ public class BookBorrowController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
     @FXML
-    public void Back()
-    {
-        ScreenController.switchScreen((Stage) borrowDatePicker.getScene().getWindow(), "/home/mixBookLoanAdmin.fxml");
+    public void Back() {
+        ScreenController.switchScreen((Stage)  bookNameLabel.getScene().getWindow(), "/home/mixBookLoanAdmin.fxml");
     }
 }

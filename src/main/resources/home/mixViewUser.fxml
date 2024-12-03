@@ -6,6 +6,6 @@
     <children>
         <fx:include source="library.fxml" />
 
-        <fx:include source="bookSearch.fxml" />
+        <fx:include source="view_user.fxml" />
     </children>
 </HBox>

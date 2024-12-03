@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" style="-fx-background-color: #00695C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.thuvien.controller.ViewUserController">
+    <children>
+        <Label layoutX="100.0" layoutY="20.0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #E1F5FE; -fx-text-alignment: center;" text="Thông tin người dùng" />
+
+        <GridPane hgap="40" layoutX="30.0" layoutY="100.0" style="-fx-background-color: #E1F5FE; -fx-padding: 40; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 2);" vgap="25" prefWidth="950.0" prefHeight="650.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30" />
+                <ColumnConstraints percentWidth="70" />
+            </columnConstraints>
+
+            <VBox alignment="CENTER" spacing="15" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="8">
+                <ImageView fx:id="userImageView" fitHeight="250" fitWidth="200" style="-fx-background-color: #E0E0E0; -fx-background-radius: 10; -fx-border-color: #90A4AE; -fx-border-width: 2;" />
+                <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #E1F5FE;" text="Ảnh đại diện" />
+                <Button fx:id="chooseImageButton" prefHeight="40" prefWidth="150"
+                        style="-fx-background-color: #42A5F5; -fx-text-fill: #FFFFFF; -fx-background-radius: 10; -fx-font-size: 14; -fx-font-weight: bold;"
+                        text="Chọn ảnh" />
+            </VBox>
+
+            <VBox alignment="TOP_LEFT" spacing="20" GridPane.columnIndex="1">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Họ và tên:" />
+                    <TextField fx:id="fullNameField" prefHeight="47.0" prefWidth="320.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5; -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Mã sinh viên:" />
+                    <TextField fx:id="mssvField" prefHeight="47.0" prefWidth="290.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5; -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Số điện thoại:" />
+                    <TextField fx:id="phoneField" prefHeight="47.0" prefWidth="290.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5; -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Ngày sinh:" />
+                    <TextField fx:id="dobField" prefHeight="47.0" prefWidth="312.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5; -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Giới tính:" />
+                    <TextField fx:id="genderField" prefHeight="47.0" prefWidth="324.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5; -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #1976D2;" text="Ngày đăng ký:" />
+                    <TextField fx:id="registrationDateField" disable="true" prefHeight="47.0" prefWidth="279.0"
+                               style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #1E88E5;
+                      -fx-border-width: 2; -fx-font-size: 16; -fx-padding: 10;" />
+                </HBox>
+
+            </VBox>
+
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="8" alignment="BOTTOM_RIGHT" spacing="10" prefHeight="100">
+                <Button fx:id="saveInfoButton" prefHeight="50" prefWidth="150"
+                        style="-fx-background-color: #FF5722; -fx-background-radius: 10; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-size: 16; -fx-cursor: hand;"
+                        text="Lưu thông tin" />
+            </VBox>
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints vgrow="ALWAYS" />
+            </rowConstraints>
+        </GridPane>
+    </children>
+</AnchorPane>

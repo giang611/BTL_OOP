@@ -4,10 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.thuvien.Application;
 import org.thuvien.dto.BookDTO;
+import org.thuvien.models.Book;
 import org.thuvien.models.Borrow;
 import org.thuvien.models.Member;
 
@@ -61,6 +61,24 @@ public class ScreenController {
             e.printStackTrace();
         }
     }
+    public static void switchScreenBookAp(Stage stage, String fxmlPath, BookDTO book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            AppreciateBookDialogController controller = loader.getController();
+            if (controller != null) {
+                controller.setBook(book);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void switchScreenEditBorrow(Stage stage, String fxmlPath, Borrow borrowRecord) {
         try {
             FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
@@ -70,6 +88,24 @@ public class ScreenController {
             EditBorrowController controller = loader.getController();
             if (controller != null) {
                 controller.setBorrowRecord(borrowRecord);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void switchScreenEditBorrowUser(Stage stage, String fxmlPath, BookDTO book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ScreenController.class.getResource(fxmlPath));
+            loader.setControllerFactory(Application.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            BookBorrowUserController controller = loader.getController();
+            if (controller != null) {
+                controller.setBorrowRecord(book);
             }
 
             stage.setScene(new Scene(root));

@@ -23,14 +23,17 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByMssv(mssv);
         return member;
     }
-    public List<Member> findAllMembers()
+    public List<Member> findAllUser()
     {
-        return memberRepository.findAll();
+        return memberRepository.findAllByRole("user");
     }
     public void save(Member member) {
         memberRepository.save(member);
     }
     public void deleteMember(Member member) {
         memberRepository.delete(member);
+    }
+    public void updateMember(Member member) {
+        memberRepository.save(member);
     }
 }

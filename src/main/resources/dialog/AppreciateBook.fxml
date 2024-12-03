@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800.0" prefWidth="1150.0" spacing="15" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.thuvien.controller.AppreciateBookDialogController">
+    <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Đánh giá và Nhận xét" />
+
+    <HBox spacing="10">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Đánh giá:" />
+        <ComboBox fx:id="ratingComboBox" promptText="Chọn điểm" style="-fx-font-size: 18px; -fx-background-color: #f4f6f7; -fx-border-color: #2980b9; -fx-border-radius: 6px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1" />
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                    <String fx:value="5" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox prefWidth="800" spacing="10">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Viết nhận xét:" />
+            <TextArea fx:id="reviewTextArea" prefRowCount="5" promptText="Nhập nhận xét của bạn..." style="-fx-font-size: 18px; -fx-background-color: #f4f6f7; -fx-border-color: #2980b9; -fx-border-radius: 6px;" wrapText="true" />
+        </VBox>
+
+        <ImageView fx:id="bookImage" fitHeight="250" fitWidth="240.0" style="-fx-border-radius: 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 3);">
+        </ImageView>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button onAction="#submitReview" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 8px; -fx-padding: 15px; -fx-cursor: hand; -fx-font-weight: bold;" text="Gửi" />
+        <Button onAction="#goBack" style="-fx-background-color: #d35400; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 8px; -fx-padding: 15px; -fx-cursor: hand; -fx-font-weight: bold;" text="Quay lại" />
+    </HBox>
+
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Nhận xét của người dùng:" />
+    <VBox fx:id="reviewsVBox" spacing="10" />
+</VBox>

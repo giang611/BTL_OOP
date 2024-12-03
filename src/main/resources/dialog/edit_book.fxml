@@ -30,7 +30,6 @@
                 <ImageView fx:id="bookImageView" fitHeight="250" fitWidth="200" style="-fx-background-color: #E0E0E0; -fx-background-radius: 10; -fx-border-color: #B0BEC5; -fx-border-width: 2;" />
                 <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #009688;" text="Bìa sách" />
 
-                <!-- Nút để chọn ảnh -->
                 <Button onAction="#handleImageSelect" style="-fx-font-size: 16; -fx-background-color: #0096; -fx-text-fill: white; -fx-padding: 10 20; -fx-border-radius: 5; -fx-cursor: hand;" text="Chọn ảnh" />
             </VBox>
 

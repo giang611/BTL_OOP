@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 import org.thuvien.Application;
+import org.thuvien.models.Member;
+import org.thuvien.utils.SessionManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class LibraryController {
 
     private List<Button> buttons;
 
+
     @FXML
     private void initialize() {
         buttons = new ArrayList<>();
@@ -45,6 +48,14 @@ public class LibraryController {
         buttons.add(btManageMember);
         buttons.add(btReview);
         buttons.add(btSearchBook);
+        Member currentMember = SessionManager.getCurrentUser();
+        if(currentMember.getRole().equals("user"))
+        {
+            btManageBooks.setText("Thông tin");
+            btManageMember.setText("Sách đã mượn");
+            btBorrowBooks.setText("Kho sách");
+
+        }
 
         resetButtonStyles();
     }
@@ -75,7 +86,13 @@ public class LibraryController {
     }
     @FXML
     private void handleManageBooks(ActionEvent event) {
-        loadContent("/home/bookManagement.fxml");
+        Member currentMember=SessionManager.getCurrentUser();
+        if(currentMember.getRole().equals("admin")) {
+           loadContent("/home/bookManagement.fxml");
+       }
+       else {
+           loadContent("/home/view_user.fxml");
+       }
         resetButtonStyles();
         btManageBooks.getStyleClass().add("button-selected");
     }
@@ -110,13 +127,27 @@ public class LibraryController {
     @FXML
     private void handleHome(ActionEvent event) {
         resetButtonStyles();
-        ScreenController.switchScreen((Stage) mainLayout.getScene().getWindow(), "/home/menu.fxml");
-    }
+        Member member=SessionManager.getCurrentUser();
+        if(member.getRole().equals("admin")) {
+
+
+            ScreenController.switchScreen((Stage) mainLayout.getScene().getWindow(), "/home/menu_admin.fxml");
+        }
+        else{
+            ScreenController.switchScreen((Stage) mainLayout.getScene().getWindow(), "/home/menu_user.fxml");
+        }
+        }
 
 
     @FXML
     private void handleBorrowBooks(ActionEvent event) {
-        loadContent("/home/BookLoanManagement.fxml");
+        Member member=SessionManager.getCurrentUser();
+        if(member.getRole().equals("admin")) {
+            loadContent("/home/BookLoanManagementAdmin.fxml");
+        }
+        else{
+            loadContent("/home/bookManagement.fxml");
+        }
         resetButtonStyles();
         btBorrowBooks.getStyleClass().add("button-selected");
     }

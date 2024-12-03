@@ -16,19 +16,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.thuvien.models.Borrow;
 import org.thuvien.service.BorrowService;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class BorrowManagementController {
+public class BorrowManagementAdminController {
 
     @FXML
     private TextField searchField;
 
     @FXML
     private Button borrowButton;
+
+    @FXML
+    private Button overdueButton;
+
     @FXML
     private TableColumn<Borrow, Void> actionColumn;
 
@@ -43,6 +48,7 @@ public class BorrowManagementController {
 
     @FXML
     private TableColumn<Borrow, String> librarianColumn;
+
     @FXML
     private TableColumn<Borrow, String> quantityColumn;
 
@@ -62,6 +68,7 @@ public class BorrowManagementController {
 
     @FXML
     public void initialize() {
+
         serialColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMember().getName()));
         librarianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLibrarian()));
@@ -104,7 +111,6 @@ public class BorrowManagementController {
                         editButton.setStyle(buttonStyle);
                         deleteButton.setStyle(buttonStyle);
 
-
                         setButtonEffect(editButton);
                         setButtonEffect(deleteButton);
                         editButton.setOnAction(event -> handleEditBorrow(getTableView().getItems().get(getIndex())));
@@ -131,8 +137,7 @@ public class BorrowManagementController {
         });
     }
 
-
-    private Callback<TableColumn<Borrow, LocalDate>, javafx.scene.control.TableCell<Borrow, LocalDate>> createDateCellFactory(DateTimeFormatter formatter) {
+    private Callback<TableColumn<Borrow, LocalDate>, TableCell<Borrow, LocalDate>> createDateCellFactory(DateTimeFormatter formatter) {
         return column -> new TextFieldTableCell<Borrow, LocalDate>() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
@@ -145,10 +150,10 @@ public class BorrowManagementController {
             }
         };
     }
-    private void handleEditBorrow(Borrow borrow) {
-        ScreenController.switchScreenEditBorrow((Stage) borrowButton.getScene().getWindow(), "/dialog/edit_borrow.fxml",borrow);
-    }
 
+    private void handleEditBorrow(Borrow borrow) {
+        ScreenController.switchScreenEditBorrow((Stage) borrowButton.getScene().getWindow(), "/dialog/edit_borrow.fxml", borrow);
+    }
 
     private void handleDeleteBorrow(Borrow borrow) {
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
@@ -159,20 +164,21 @@ public class BorrowManagementController {
         confirmationDialog.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    borrowService.deleteBorrow(borrow.getId());
+                    borrow.setIs_deleted(1);
+                    borrowService.updateBorrow(borrow);
 
-                    borrowList.remove(borrow);
-                    bookTable.refresh();
+                    // Làm mới danh sách hiển thị
+                    loadBorrowData();
 
-                    showAlert(Alert.AlertType.INFORMATION, "Xóa thành công", "Bản ghi đã được xóa.");
+                    showAlert(Alert.AlertType.INFORMATION, "Xóa thành công", "Bản ghi đã được cập nhật trạng thái xóa.");
                 } catch (Exception e) {
-
                     e.printStackTrace();
                     showAlert(Alert.AlertType.ERROR, "Lỗi", "Không thể xóa bản ghi!");
                 }
             }
         });
     }
+
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -180,9 +186,10 @@ public class BorrowManagementController {
         alert.showAndWait();
     }
 
-
     private void loadBorrowData() {
-        List<Borrow> borrows = borrowService.findAllBorrows();
+        List<Borrow> borrows = borrowService.findAllBorrows().stream()
+                .filter(borrow -> borrow.getIs_deleted() == 0)
+                .collect(Collectors.toList());
         borrowList = FXCollections.observableArrayList(borrows);
         bookTable.setItems(borrowList);
     }
@@ -194,8 +201,23 @@ public class BorrowManagementController {
                 .collect(Collectors.toList());
         bookTable.setItems(FXCollections.observableArrayList(filteredList));
     }
+
     @FXML
     private void handleBorrow() {
         ScreenController.switchScreen((Stage) borrowButton.getScene().getWindow(), "/dialog/BorrowRecord.fxml");
+    }
+
+    @FXML
+    private void filterOverdue() {
+        List<Borrow> overdueList = borrowList.stream()
+                .filter(borrow -> {
+                    LocalDate returnDate = borrow.getReturnDate();
+                    return returnDate != null
+                            && returnDate.isBefore(LocalDate.now())
+                            && !borrow.getStatus().equalsIgnoreCase("Đã trả");
+                })
+                .collect(Collectors.toList());
+
+        bookTable.setItems(FXCollections.observableArrayList(overdueList));
     }
 }

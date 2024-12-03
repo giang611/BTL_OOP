@@ -6,6 +6,6 @@
     <children>
         <fx:include source="library.fxml" />
 
-        <fx:include source="BookLoanManagement.fxml" />
+        <fx:include source="BookLoanManagementAdmin.fxml" />
     </children>
 </HBox>

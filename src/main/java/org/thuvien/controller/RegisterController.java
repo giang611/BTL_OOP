@@ -3,6 +3,7 @@ package org.thuvien.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.thuvien.service.MemberService;
 import org.thuvien.models.Member;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -30,6 +34,8 @@ private MemberService memberService;
     private TextField  name;
     @FXML
     private TextField  mssvField;
+    @FXML
+    private DatePicker birthDatePicker;
 
     @FXML
     private void handleRegister(ActionEvent event) {
@@ -38,6 +44,8 @@ private MemberService memberService;
         String confirmPassword = confirmPasswordField.getText();
         String name = this.name.getText();
         String mssv = this.mssvField.getText();
+        LocalDate birthDate = this.birthDatePicker.getValue();
+        Date birthday=Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Member> existingMember = memberService.getMemberByPhone(phone);
          Optional<Member> existingMember2 = memberService.getMemberByMssv(mssv);
         if (phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()||name.isEmpty()) {
@@ -58,6 +66,8 @@ private MemberService memberService;
             return;
         }
         Member newMember = new Member(name, mssv,phone, password);
+        newMember.setRole("user");
+        newMember.setBirthday(birthday);
         memberService.createMember(newMember);
 
         showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");

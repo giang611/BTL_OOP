@@ -6,6 +6,7 @@ import org.thuvien.models.Borrow;
 import org.thuvien.models.Member;
 import org.thuvien.repository.BorrowRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,9 +19,10 @@ public class BorrowService {
     public List<Borrow> findAllBorrows() {
         return borrowRepository.findAll();
     }
-    public void deleteBorrow(int borrowId) {
-        borrowRepository.deleteById(borrowId);
+    public void updateBorrow(Borrow borrow) {
+        borrowRepository.save(borrow);
     }
+
 
 
 }

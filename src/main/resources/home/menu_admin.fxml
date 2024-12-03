@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.MenuController" prefHeight="900.0" prefWidth="1400.0" stylesheets="@../css/menu.css">
+    <VBox alignment="CENTER" spacing="50.0" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+        <Label text="PHẦN MỀM QUẢN LÝ THƯ VIỆN" styleClass="label-title" />
+
+        <HBox alignment="CENTER" styleClass="hbox-padding">
+            <Button fx:id="BtnManageMembers" text="Quản lý Độc giả" styleClass="button-custom" onMouseClicked="#handleManageReaders">
+                <graphic>
+                    <ImageView fx:id="imgMember" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/1.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnManageBook" text="Quản lý sách" styleClass="button-custom" onMouseClicked="#handleBook">
+                <graphic>
+                    <ImageView fx:id="imgBook" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/2.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnManageLoans" text="Quản lý Mượn Trả" styleClass="button-custom" onMouseClicked="#handleManageLoans">
+                <graphic>
+                    <ImageView fx:id="imgLoans" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/3.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+
+        <HBox alignment="CENTER" styleClass="hbox-padding">
+            <Button fx:id="BtnSearch" text="Tra cứu sách" styleClass="button-custom" onMouseClicked="#handleSearch">
+                <graphic>
+                    <ImageView fx:id="imgReaders" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/8.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnReview" text="Đánh giá" styleClass="button-custom" onMouseClicked="#handleReview">
+                <graphic>
+                    <ImageView fx:id="imgSearch" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/5.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLogout" text="Đăng xuất" styleClass="button-custom" onMouseClicked="#handleLogout">
+                <graphic>
+                    <ImageView fx:id="imgLogout" fitWidth="90" fitHeight="90">
+                        <image>
+                            <Image url="@../images/7.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </VBox>
+</AnchorPane>

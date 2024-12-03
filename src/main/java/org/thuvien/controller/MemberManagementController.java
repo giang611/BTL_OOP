@@ -115,7 +115,7 @@ public class MemberManagementController {
 
 
     private void loadMemberData() {
-        List<Member> members = memberService.findAllMembers();
+        List<Member> members = memberService.findAllUser();
         memberList = FXCollections.observableArrayList(members);
         memberTable.setItems(memberList);
     }

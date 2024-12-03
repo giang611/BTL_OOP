@@ -15,13 +15,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
+    @Column
     private int documentId;
-    @Column(nullable = false)
+    @Column
     private int rating;
-    @Column(nullable = false)
+    @Column
     private String review;
-    @Column(nullable = false)
+    @Column
     private Date createdAt;
     @ManyToOne
     @JoinColumn(name = "member", nullable = false)

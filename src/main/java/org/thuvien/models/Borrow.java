@@ -40,4 +40,6 @@ public class Borrow {
     private int quantity;
     @Column(name = "librarian", nullable = false, length = 255)
     private String librarian;
+    @Column
+    private int is_deleted;
 }

@@ -9,7 +9,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.BookManagerController" prefWidth="1150.0" prefHeight="800.0" style="-fx-background-color: #E0F2F1;">
     <children>
-        <Label layoutX="20.0" layoutY="20.0" text="Quản lý kho sách" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+        <Label fx:id="bookLabel" layoutX="20.0" layoutY="20.0" text="Quản lý kho sách" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
 
         <HBox layoutX="20.0" layoutY="70.0" spacing="15.0">
             <children>

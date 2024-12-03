@@ -29,6 +29,14 @@ public class Member {
     private String password;
     @Column(nullable = false)
     private Date createdAt;
+    @Column(nullable = false)
+    private String role;
+    @Lob
+    @Column(name = "image", columnDefinition = "BLOB")
+    private byte[] image;
+    @Column
+    private String gender;
+
 
     public Member() {}
 
@@ -39,7 +47,7 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Borrow> borrows;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
