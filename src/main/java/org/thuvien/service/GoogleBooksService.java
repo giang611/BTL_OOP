@@ -37,14 +37,12 @@ public class GoogleBooksService {
                 for (JsonNode item : root.path("items")) {
                     JsonNode volumeInfo = item.path("volumeInfo");
 
-                    // Lấy các trường cần thiết: title, author, description, và isbn
                     String title = volumeInfo.path("title").asText("No Title");
                     String author = volumeInfo.path("authors").isArray() && volumeInfo.path("authors").size() > 0
                             ? volumeInfo.path("authors").get(0).asText("Unknown Author")
                             : "Unknown Author";
                     String description = volumeInfo.path("description").asText("No description available.");
 
-                    // Lấy isbn từ industryIdentifiers nếu có
                     String isbn = "No ISBN available";
                     if (volumeInfo.has("industryIdentifiers")) {
                         for (JsonNode identifier : volumeInfo.path("industryIdentifiers")) {
