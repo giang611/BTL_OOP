@@ -46,7 +46,6 @@ public class BorrowManagementUserController {
 
     @FXML
     private void initialize() {
-        // Định nghĩa các cột trong bảng
         serialColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMember().getName()));
@@ -57,15 +56,12 @@ public class BorrowManagementUserController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        // Định dạng ngày tháng
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         borrowDateColumn.setCellFactory(createDateCellFactory(formatter));
         returnDateColumn.setCellFactory(createDateCellFactory(formatter));
 
-        // Nạp dữ liệu
         loadBorrowData();
 
-        // Thêm chức năng tìm kiếm
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterBorrowData(newValue));
     }
 

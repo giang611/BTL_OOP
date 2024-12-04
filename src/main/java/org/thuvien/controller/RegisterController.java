@@ -47,7 +47,7 @@ private MemberService memberService;
         LocalDate birthDate = this.birthDatePicker.getValue();
         Date birthday=Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Optional<Member> existingMember = memberService.getMemberByPhone(phone);
-         Optional<Member> existingMember2 = memberService.getMemberByMssv(mssv);
+         Member existingMember2 = memberService.getMemberByMssv(mssv);
         if (phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()||name.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Lỗi", "Vui lòng điền đầy đủ thông tin.");
             return;
@@ -61,13 +61,13 @@ private MemberService memberService;
             showAlert(Alert.AlertType.ERROR, "Lỗi", "Số điện thoại đã được đăng ký.");
             return;
         }
-        if(existingMember2.isPresent()) {
+        if(existingMember2!=null) {
             showAlert(Alert.AlertType.ERROR, "Lỗi", "Mã số sinh viên đã tồn tại");
             return;
         }
         Member newMember = new Member(name, mssv,phone, password);
         newMember.setRole("user");
-        newMember.setBirthday(birthday);
+        newMember.setBirthdate(birthday);
         memberService.createMember(newMember);
 
         showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");

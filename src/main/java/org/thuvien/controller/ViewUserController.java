@@ -58,7 +58,7 @@ public class ViewUserController {
             fullNameField.setText(member.getName());
             mssvField.setText(member.getMssv());
             phoneField.setText(member.getPhoneNumber());
-            dobField.setText(formatDate(member.getBirthday()));
+            dobField.setText(formatDate(member.getBirthdate()));
             genderField.setText(formatGender(member.getGender()));
             registrationDateField.setText(formatDate(member.getCreatedAt()));
 
@@ -112,7 +112,7 @@ public class ViewUserController {
                 member.setName(fullNameField.getText());
                 member.setMssv(mssvField.getText());
                 member.setPhoneNumber(phoneField.getText());
-                member.setBirthday(birthday);
+                member.setBirthdate(birthday);
                 member.setGender(parseGender(genderInput));
 
                 if (uploadedImage != null) {
@@ -175,7 +175,7 @@ public class ViewUserController {
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

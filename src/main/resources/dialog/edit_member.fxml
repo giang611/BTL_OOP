@@ -26,8 +26,8 @@
 
         <Label layoutX="30.0" layoutY="330.0" text="Ngày tạo:" styleClass="label" />
         <DatePicker fx:id="createDatePicker" layoutX="200.0" layoutY="325.0" prefWidth="550.0" styleClass="date-picker" disable="true"/>
-        <Button fx:id="saveButton" layoutX="200.0" layoutY="500.0" onAction="#handleSave" styleClass="button-save" text="Lưu thay đổi" />
+        <Button layoutX="200.0" layoutY="500.0" onAction="#handleSave" styleClass="button-save" text="Lưu thay đổi" />
 
-        <Button fx:id="cancelButton" layoutX="400.0" layoutY="500.0" onAction="#handleCancel" styleClass="button-cancel" text="Hủy bỏ" />
+        <Button layoutX="400.0" layoutY="500.0" onAction="#handleCancel" styleClass="button-cancel" text="Hủy bỏ" />
     </children>
 </AnchorPane>

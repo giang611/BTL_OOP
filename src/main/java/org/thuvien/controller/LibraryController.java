@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,6 +35,8 @@ public class LibraryController {
     private Button btReview;
     @FXML
     private Button btSearchBook;
+    @FXML
+    private Label label1;
 
 
     private List<Button> buttons;
@@ -50,7 +53,7 @@ public class LibraryController {
         buttons.add(btSearchBook);
         Member currentMember = SessionManager.getCurrentUser();
         if(currentMember.getRole().equals("user"))
-        {
+        {   label1.setText("Thư Viện Số Hóa");
             btManageBooks.setText("Thông tin");
             btManageMember.setText("Sách đã mượn");
             btBorrowBooks.setText("Kho sách");
@@ -120,7 +123,7 @@ public class LibraryController {
     private void handleReview(ActionEvent event) {
         resetButtonStyles();
         btReview.getStyleClass().add("button-selected");
-        loadContentVbox("/home/review.fxml");
+        loadContentVbox("/home/RatingsView.fxml");
     }
 
 
@@ -153,9 +156,14 @@ public class LibraryController {
     }
     @FXML
     private void handleManageMembers(ActionEvent event) {
+        Member currentMember=SessionManager.getCurrentUser();
         resetButtonStyles();
         btManageMember.getStyleClass().add("button-selected");
-        loadContent("/home/MemberManagement.fxml");
+        if(currentMember.getRole().equals("admin")) {
+        loadContent("/home/MemberManagement.fxml");}
+        else{
+            loadContent("/home/BookLoanManagementUser.fxml");
+        }
 
     }
     @FXML

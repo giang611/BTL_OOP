@@ -19,8 +19,8 @@ public class MemberService {
     public void createMember(Member member) {
         memberRepository.save(member);
     }
-    public Optional<Member> getMemberByMssv(String mssv) {
-        Optional<Member> member = memberRepository.findByMssv(mssv);
+    public Member getMemberByMssv(String mssv) {
+        Member member = memberRepository.findByMssv(mssv);
         return member;
     }
     public List<Member> findAllUser()

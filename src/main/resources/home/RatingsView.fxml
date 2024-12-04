@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.thuvien.controller.RatingsViewController"
+      spacing="15" alignment="TOP_CENTER" prefWidth="1150" prefHeight="800"
+      style="-fx-background-color: #FAFAFA; -fx-padding: 20;" stylesheets="@../css/review.css">
+
+    <!-- Tiêu đề -->
+    <Label text="Đánh giá và nhận xét" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+    <!-- Khu vực tìm kiếm -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <TextField fx:id="searchField" promptText="Nhập tên sách tìm kiếm..." style="-fx-pref-width: 400px;" />
+        <Button text="Tìm kiếm" fx:id="searchButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+    </HBox>
+
+    <!-- Nội dung chính -->
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
+        <VBox fx:id="ratingsContainer" spacing="20" style="-fx-padding: 10;">
+        </VBox>
+    </ScrollPane>
+</VBox>

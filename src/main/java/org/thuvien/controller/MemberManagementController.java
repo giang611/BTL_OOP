@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.thuvien.models.Member;
 import org.thuvien.service.MemberService;
+import org.thuvien.utils.SessionManager;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -42,6 +43,8 @@ public class MemberManagementController {
 
     @FXML
     private TableColumn<Member, String> nameColumn;
+    @FXML
+    private Label label;
 
     @FXML
     private TableColumn<Member, String> phoneNumberColumn;
@@ -61,31 +64,36 @@ public class MemberManagementController {
     private MemberService memberService;
     @FXML
     public void initialize() {
+        Member member= SessionManager.getCurrentUser();
+        if(member.getRole().equals("user")){
+            label.setText("Sách đã mượn");
+        }
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         mssvColumn.setCellValueFactory(new PropertyValueFactory<>("mssv"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        birthdayColumn.setCellValueFactory(cellData -> {
-            Date date = cellData.getValue().getBirthday();
-            LocalDate localDate = (date != null) ? date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-            return new SimpleObjectProperty<>(localDate);
-        });
+        if(birthdayColumn!=null) {
+            birthdayColumn.setCellValueFactory(cellData -> {
+                Date date = cellData.getValue().getBirthdate();
+                LocalDate localDate = (date != null) ? date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+                return new SimpleObjectProperty<>(localDate);
+            });
 
-        birthdayColumn.setCellFactory(column -> new TableCell<Member, LocalDate>() {
-            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            birthdayColumn.setCellFactory(column -> new TableCell<Member, LocalDate>() {
+                private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            @Override
-            protected void updateItem(LocalDate item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.format(formatter));
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.format(formatter));
+                    }
                 }
-            }
-        });
-
+            });
+        }
         createdAtColumn.setCellValueFactory(cellData -> {
             Date date = cellData.getValue().getCreatedAt();
             LocalDate localDate = (date != null) ? date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;

@@ -1,6 +1,7 @@
 package org.thuvien.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -73,20 +74,21 @@ public class AppreciateBookDialogController {
         try {
             Member currentMember= SessionManager.getCurrentUser();
             Rating rating = new Rating();
-            rating.setDocumentId(currentBook.getId());
+            rating.setDocument(bookRepository.findById(currentBook.getId()).orElse(null));
             rating.setRating(Integer.parseInt(selectedRating));
             rating.setReview(reviewText);
             rating.setCreatedAt(new Date());
             rating.setMember(currentMember);
 
             ratingRepository.save(rating);
-            System.out.println("Đánh giá đã được lưu thành công!");
-
+            Stage currentStage = (Stage) bookImage.getScene().getWindow();
+            showAlert("Đánh giá thành công","Thông tin đã được lưu");
+            ScreenController.switchScreen(currentStage, "/home/mix.fxml");
             ratingComboBox.getSelectionModel().clearSelection();
             reviewTextArea.clear();
 
         } catch (Exception e) {
-            System.err.println("Lỗi khi lưu đánh giá: " + e.getMessage());
+
         }
     }
 
@@ -94,5 +96,12 @@ public class AppreciateBookDialogController {
     public void goBack() {
         Stage currentStage = (Stage) bookImage.getScene().getWindow();
         ScreenController.switchScreen(currentStage, "/home/mix.fxml");
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

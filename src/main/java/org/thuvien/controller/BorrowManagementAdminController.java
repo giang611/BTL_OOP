@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.thuvien.models.Book;
 import org.thuvien.models.Borrow;
+import org.thuvien.repository.BookRepository;
 import org.thuvien.service.BorrowService;
 
 import java.time.LocalDate;
@@ -65,6 +67,8 @@ public class BorrowManagementAdminController {
 
     @Autowired
     private BorrowService borrowService;
+    @Autowired
+    private BookRepository bookRepository;
 
     @FXML
     public void initialize() {
@@ -166,8 +170,10 @@ public class BorrowManagementAdminController {
                 try {
                     borrow.setIs_deleted(1);
                     borrowService.updateBorrow(borrow);
-
-                    // Làm mới danh sách hiển thị
+                    Book book = bookRepository.findById(borrow.getDocument().getId()).get();
+                    int quantity = book.getQuantity();
+                    book.setQuantity(quantity +borrow.getQuantity());
+                    bookRepository.save(book);
                     loadBorrowData();
 
                     showAlert(Alert.AlertType.INFORMATION, "Xóa thành công", "Bản ghi đã được cập nhật trạng thái xóa.");

@@ -23,8 +23,8 @@ public class Member {
     private String mssv;
     @Column(nullable = false)
     private String phoneNumber;
-    @Column(name="birth_date")
-    private Date birthday;
+    @Column
+    private Date birthdate;
     @Column()
     private String password;
     @Column(nullable = false)

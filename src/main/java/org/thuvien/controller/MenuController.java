@@ -69,7 +69,7 @@ public class MenuController {
 
     @FXML
     private void handleReview(MouseEvent event) {
-        ScreenController.switchScreen((Stage) btnReview.getScene().getWindow(), "/home/mixReview.fxml");
+        ScreenController.switchScreen((Stage) btnReview.getScene().getWindow(), "/home/mixRatingsView.fxml");
     }
 
     @FXML

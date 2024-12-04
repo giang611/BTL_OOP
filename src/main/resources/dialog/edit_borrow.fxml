@@ -37,8 +37,8 @@
         <ComboBox fx:id="statusComboBox" layoutX="200.0" layoutY="445.0" prefWidth="550.0" styleClass="combo-box">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Borrowed" />
-                    <String fx:value="Returned" />
+                    <String fx:value="borrowed" />
+                    <String fx:value="returned" />
                 </FXCollections>
             </items>
         </ComboBox>

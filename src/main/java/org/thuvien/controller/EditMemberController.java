@@ -34,6 +34,7 @@ public class EditMemberController {
 
 
 
+
     @Autowired
     private MemberService memberService;
 
@@ -50,10 +51,12 @@ public class EditMemberController {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
         createDatePicker.setValue(localCreatedAt);
-        LocalDate localBirthday = member.getBirthday().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-        birthDatePicker.setValue(localBirthday);
+        if(member.getBirthdate()!=null) {
+            LocalDate localBirthday = member.getBirthdate().toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            birthDatePicker.setValue(localBirthday);
+        }
     }
 
     @FXML
@@ -67,14 +70,20 @@ public class EditMemberController {
                 showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.ERROR);
                 return;
             }
-
             currentMember.setMssv(mssv);
             currentMember.setName(name);
             currentMember.setPhoneNumber(phoneNumber);
+            LocalDate localDate = birthDatePicker.getValue();
+            if (localDate != null) {
+                Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                currentMember.setBirthdate(date);
+            }
 
-            memberService.save(currentMember);
+
+            memberService.updateMember(currentMember);
 
             showAlert("Thành công", "Cập nhật thông tin thành viên thành công!", Alert.AlertType.INFORMATION);
+            ScreenController.switchScreen((Stage) phoneField.getScene().getWindow(), "/home/mixMemberManagement.fxml");
         } catch (Exception e) {
             showAlert("Lỗi", "Đã xảy ra lỗi khi lưu thông tin: " + e.getMessage(), Alert.AlertType.ERROR);
         }

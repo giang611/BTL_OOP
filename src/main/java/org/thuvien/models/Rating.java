@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,8 +17,6 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private int documentId;
-    @Column
     private int rating;
     @Column
     private String review;
@@ -27,11 +26,14 @@ public class Rating {
     @JoinColumn(name = "member", nullable = false)
     private Member member;
     public Rating() {}
+    @ManyToOne
+    @JoinColumn(name = "document_id", nullable = false)
+    private Document document;
+
 
     public Rating(int id, int documentId,
                   int rating, String review, Date createdAt) {
         this.id = id;
-        this.documentId = documentId;
         this.rating = rating;
         this.review = review;
         this.createdAt = createdAt;

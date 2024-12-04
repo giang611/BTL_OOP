@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.thuvien.models.Book;
 import org.thuvien.models.Borrow;
 import org.thuvien.repository.BookRepository;
 import org.thuvien.repository.BorrowRepository;
@@ -64,6 +65,11 @@ public class EditBorrowController {
             LocalDate returnDate = returnDatePicker.getValue();
             String status = statusComboBox.getSelectionModel().getSelectedItem();
             Borrow borrow = borrowRepository.findById(Integer.valueOf(serial)).get();
+            Book book=bookRepository.findById(borrow.getDocument().getId()).get();
+            if(borrow.getStatus().equals("borrowed")&&status.equals("returned")){
+                book.setQuantity(book.getQuantity()+Integer.parseInt(quantity));
+                bookRepository.save(book);
+            }
             if (serial.isEmpty() || borrower.isEmpty() || librarian.isEmpty() || borrowDate == null || returnDate == null) {
                 showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.ERROR);
                 return;
@@ -86,7 +92,7 @@ public class EditBorrowController {
             borrow.setId(Integer.parseInt(serial));
             borrow.setBorrowDate(borrowDate);
             borrow.setReturnDate(returnDate);
-            borrow.setStatus("Borrowed");
+            borrow.setStatus("borrowed");
             borrow.setQuantity(Integer.parseInt(quantity));
             borrow.setLibrarian(librarian);
             borrow.setStatus(status);

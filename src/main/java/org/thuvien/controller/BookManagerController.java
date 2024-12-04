@@ -61,6 +61,7 @@ public class BookManagerController {
         Member member = SessionManager.getCurrentUser();
         if (member.getRole().equals("user")) {
             bookLabel.setText("Kho sách");
+            addButton.setVisible(false);
         }
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

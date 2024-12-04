@@ -36,6 +36,8 @@ public abstract class Document {
 
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Borrow> borrows;
+    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings;
 
    private String author;
 
