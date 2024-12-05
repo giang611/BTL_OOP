@@ -220,7 +220,7 @@ public class BorrowManagementAdminController {
                     LocalDate returnDate = borrow.getReturnDate();
                     return returnDate != null
                             && returnDate.isBefore(LocalDate.now())
-                            && !borrow.getStatus().equalsIgnoreCase("Đã trả");
+                            && !borrow.getStatus().equalsIgnoreCase("returned");
                 })
                 .collect(Collectors.toList());
 

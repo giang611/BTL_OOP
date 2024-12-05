@@ -38,7 +38,7 @@ public class Borrow {
 
     @Column(nullable = false)
     private int quantity;
-    @Column(name = "librarian", nullable = false, length = 255)
+    @Column(name = "librarian", length = 255)
     private String librarian;
     @Column
     private int is_deleted;

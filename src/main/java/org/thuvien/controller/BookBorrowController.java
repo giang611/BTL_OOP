@@ -90,10 +90,7 @@ public class BookBorrowController {
 
 
         int borrowQuantity;
-        if (borrowDate.isAfter(returnDate)) {
-            showAlert("Lỗi ngày mượn/trả", "Ngày mượn không được lớn hơn ngày trả.");
-            return;
-        }
+
         if (serial.isEmpty() || borrowerName.isEmpty() || borrowerPhone.isEmpty() || borrowDate == null || returnDate == null||borrowerMssv.isEmpty()) {
             showAlert("Thiếu thông tin", "Vui lòng nhập đầy đủ thông tin.");
             return;
@@ -118,7 +115,10 @@ public class BookBorrowController {
             showAlert("Số lượng không đủ", "Không đủ số lượng sách để mượn.");
             return;
         }
-
+        if (borrowDate.isAfter(returnDate)) {
+            showAlert("Lỗi ngày mượn/trả", "Ngày mượn không được lớn hơn ngày trả.");
+            return;
+        }
         book.setQuantity(book.getQuantity() - borrowQuantity);
         bookRepository.save(book);
 

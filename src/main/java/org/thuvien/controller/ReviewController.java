@@ -1,6 +1,7 @@
 package org.thuvien.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
@@ -57,7 +58,14 @@ public class ReviewController {
             ratingComboBox.setValue(null);
             reviewTextArea.clear();
         } else {
-            System.out.println("Vui lòng nhập đầy đủ thông tin.");
+            showAlert(Alert.AlertType.ERROR,"Lỗi","Vui lòng điền đủ thông tin");
         }
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -120,11 +120,10 @@ Book book=bookRepository.findById(selectedBook.getId()).get();
         borrowRecord.setReturnDate(returnDate);
         borrowRecord.setQuantity(borrowQuantity);
         borrowRecord.setStatus("borrowed");
-        borrowRecord.setLibrarian(currentUser.getName());
         borrowRepository.save(borrowRecord);
 
         showAlert("Ghi nhận thành công", "Thông tin mượn sách đã được lưu.");
-        ScreenController.switchScreen((Stage) bookNameLabel.getScene().getWindow(), "/home/mixBookLoanAdmin.fxml");
+        ScreenController.switchScreen((Stage) bookNameLabel.getScene().getWindow(), "/home/mixBookLoanUser.fxml");
     }
 
     private void showAlert(String title, String message) {
@@ -138,6 +137,6 @@ Book book=bookRepository.findById(selectedBook.getId()).get();
 
     @FXML
     public void Back() {
-        ScreenController.switchScreen((Stage)  bookNameLabel.getScene().getWindow(), "/home/mixBookLoanAdmin.fxml");
+        ScreenController.switchScreen((Stage)  bookNameLabel.getScene().getWindow(), "/home/mix.fxml");
     }
 }

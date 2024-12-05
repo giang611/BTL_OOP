@@ -48,7 +48,7 @@ public class BorrowManagementUserController {
     private void initialize() {
         serialColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getMember().getName()));
+                new SimpleStringProperty(cellData.getValue().getDocument().getName()));
         librarianColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getLibrarian()));
         borrowDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
