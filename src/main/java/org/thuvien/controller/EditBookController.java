@@ -38,8 +38,6 @@ public class EditBookController {
     @FXML
     private TextField publisherField;
     @FXML
-    private TextField publishedYearField;
-    @FXML
     private TextField quantityField;
     @FXML
     private TextArea descriptionField;
@@ -70,7 +68,6 @@ public class EditBookController {
             authorField.setText(bookEdit.getAuthor());
             genreField.setText(String.join(", ", bookEdit.getCategories()));
             publisherField.setText(bookEdit.getPublisher());
-            publishedYearField.setText(String.valueOf(bookEdit.getPublishedDate().getYear()));
             quantityField.setText(String.valueOf(bookEdit.getQuantity()));
             descriptionField.setText(bookEdit.getDescription());
             byte[] imageBytes = bookEdit.getImage();

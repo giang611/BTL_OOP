@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
-public class BookBorrowController {
+public class BorrowRecordController {
 
     @FXML
     private TextField serialTextField;

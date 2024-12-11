@@ -32,9 +32,6 @@ public class EditMemberController {
     private DatePicker birthDatePicker;
 
 
-
-
-
     @Autowired
     private MemberService memberService;
 

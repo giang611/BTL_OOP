@@ -1,7 +1,6 @@
 package org.thuvien.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -205,11 +204,11 @@ public class MemberManagementController {
     }
 
     private void handleSearch(String keyword) {
-        String lowerCaseKeyword = keyword.toLowerCase();
+        String Keyword = keyword.toLowerCase();
         List<Member> filteredList = memberList.stream()
-                .filter(member -> member.getName().toLowerCase().contains(lowerCaseKeyword) ||
-                        member.getMssv().toLowerCase().contains(lowerCaseKeyword) ||
-                        member.getPhoneNumber().toLowerCase().contains(lowerCaseKeyword))
+                .filter(member -> member.getName().toLowerCase().contains(Keyword) ||
+                        member.getMssv().toLowerCase().contains(Keyword)
+                        )
                 .collect(Collectors.toList());
         memberTable.setItems(FXCollections.observableArrayList(filteredList));
     }

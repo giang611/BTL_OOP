@@ -99,7 +99,7 @@ public class ViewUserController {
             try {
                 Date birthday = parseDate(dobField.getText());
                 if (birthday == null || !isValidBirthday(birthday)) {
-                    showAlert("Lỗi", "Ngày sinh không hợp lệ. Vui lòng nhập đúng định dạng 'dd/MM/yyyy' và đảm bảo ngày này không lớn hơn ngày hiện tại.");
+                    showAlert("Lỗi", "Ngày sinh không hợp lệ.");
                     return;
                 }
 

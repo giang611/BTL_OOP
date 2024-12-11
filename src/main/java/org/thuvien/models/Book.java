@@ -18,7 +18,7 @@ public class Book extends Document {
 
     @Column(nullable = false)
     private String publisher;
-    @Column(nullable = false)
+    @Column()
     private Date publishedDate;
 
     public Book(Builder builder) {
@@ -40,9 +40,6 @@ public class Book extends Document {
 
     @Override
     public void printInfo() {
-        System.out.println("Publisher: " + publisher);
-        System.out.println("Published Date: " + publishedDate);
-        System.out.println("Description: " + getDescription());
     }
 
     public static class Builder {

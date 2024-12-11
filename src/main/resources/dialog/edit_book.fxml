@@ -54,10 +54,6 @@
                     <TextField fx:id="publisherField" prefHeight="47.0" prefWidth="295.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #B0BEC5; -fx-border-width: 1; -fx-font-size: 16; -fx-padding: 10;" />
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" spacing="12">
-                    <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #009688;" text="Năm xuất bản:" />
-                    <TextField fx:id="publishedYearField" prefHeight="47.0" prefWidth="288.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-border-color: #B0BEC5; -fx-border-width: 1; -fx-font-size: 16; -fx-padding: 10;" />
-                </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="12">
                     <Label style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #009688;" text="Số lượng:" />
@@ -82,10 +78,9 @@
             </rowConstraints>
         </GridPane>
 
-        <HBox alignment="CENTER_RIGHT" layoutX="600.0" layoutY="800.0" spacing="20" style="-fx-padding: 20 30 20 0;">
+        <HBox alignment="CENTER_RIGHT" layoutX="600.0" layoutY="728.0" prefHeight="159.0" prefWidth="192.0" spacing="20" style="-fx-padding: 20 30 20 0;">
             <Button onAction="#handleSave" style="-fx-font-size: 18; -fx-background-color: #009688; -fx-text-fill: white; -fx-padding: 10 20; -fx-border-radius: 5; -fx-cursor: hand;" text="Lưu" />
             <Button onAction="#handleCancel" style="-fx-font-size: 18; -fx-background-color: #B0BEC5; -fx-text-fill: white; -fx-padding: 10 20; -fx-border-radius: 5; -fx-cursor: hand;" text="Hủy" />
         </HBox>
     </children>
 </AnchorPane>
-

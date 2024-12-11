@@ -46,12 +46,7 @@ public class GoogleBooksService {
                     String isbn = "No ISBN available";
                     if (volumeInfo.has("industryIdentifiers")) {
                         for (JsonNode identifier : volumeInfo.path("industryIdentifiers")) {
-                            if ("ISBN_13".equals(identifier.path("type").asText())) {
                                 isbn = identifier.path("identifier").asText();
-                                break;
-                            } else if ("ISBN_10".equals(identifier.path("type").asText())) {
-                                isbn = identifier.path("identifier").asText();
-                            }
                         }
                     }
 

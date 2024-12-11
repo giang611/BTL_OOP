@@ -61,7 +61,6 @@
             <version>20230227</version>
         </dependency>
 
-
         <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>

@@ -76,7 +76,6 @@ public class RatingsViewController {
 
         header.getChildren().add(userInfo);
 
-        // Số sao đánh giá
         HBox ratingBox = new HBox();
         ratingBox.getStyleClass().add("rating-box");
         Label starLabel = new Label();
