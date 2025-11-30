@@ -201,9 +201,9 @@ public class BorrowManagementAdminController {
     }
 
     private void handleSearch(String keyword) {
-        String lowerCaseKeyword = keyword.toLowerCase();
+        String Keyword = keyword.toLowerCase();
         List<Borrow> filteredList = borrowList.stream()
-                .filter(borrow -> borrow.getMember().getName().toLowerCase().contains(lowerCaseKeyword))
+                .filter(borrow -> borrow.getMember().getName().toLowerCase().contains(Keyword))
                 .collect(Collectors.toList());
         bookTable.setItems(FXCollections.observableArrayList(filteredList));
     }

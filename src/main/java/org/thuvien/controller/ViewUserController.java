@@ -94,9 +94,17 @@ public class ViewUserController {
 
     private void handleSaveInfo() {
         Member member = SessionManager.getCurrentUser();
-
         if (member != null) {
             try {
+                if (fullNameField.getText().trim().isEmpty() ||
+                        mssvField.getText().trim().isEmpty() ||
+                        phoneField.getText().trim().isEmpty() ||
+                        dobField.getText().trim().isEmpty() ||
+                        genderField.getText().trim().isEmpty()) {
+                    showAlert("Lỗi", "Vui lòng điền đầy đủ thông tin.");
+                    return;
+                }
+
                 Date birthday = parseDate(dobField.getText());
                 if (birthday == null || !isValidBirthday(birthday)) {
                     showAlert("Lỗi", "Ngày sinh không hợp lệ.");
@@ -126,6 +134,7 @@ public class ViewUserController {
             }
         }
     }
+
 
     private Date parseDate(String dateStr) {
         try {

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,8 @@ public abstract class Document {
     @Column(name = "categories")
     private String categories;
 
+    public abstract void printInfo();
+
     public Document() {}
 
     public Document(int id, String name, String author, String description, Date createdAt, int quantity, String categories, byte[] image) {
@@ -57,5 +60,5 @@ public abstract class Document {
         this.image = image;
     }
 
-    public abstract void printInfo();
+
 }

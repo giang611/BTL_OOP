@@ -31,7 +31,7 @@ public class BookService {
 
             bookDTO.setAuthor(book.getAuthor());
 
-            bookDTO.setName(book.getName());
+            bookDTO.setName(book.getAuthor());
             bookDTO.setDescription(book.getDescription());
             bookDTO.setQuantity(book.getQuantity());
             bookDTO.setCategories(book.getCategories());
