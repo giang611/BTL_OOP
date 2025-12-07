@@ -1,4 +1,4 @@
-package org.thuvien.modelsTest;
+package org.thuvien.unitTest.modelsTest;
 
 import org.junit.jupiter.api.Test;
 import org.thuvien.models.Book;
